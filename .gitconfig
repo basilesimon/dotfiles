@@ -1,0 +1,12 @@
+[user]
+	name = basilesimon
+	email = basile@basilesimon.fr
+[credential]
+	helper = cache --timeout=3600
+[color]
+	ui = true
+[core]
+	editor = vim
+[alias]
+	log = lg --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

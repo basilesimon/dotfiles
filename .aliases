@@ -1,0 +1,27 @@
+# unix
+alias install="sudo apt-get install"
+alias update="sudo apt-get update"
+alias upgrade="sudo apt-get upgrade"
+alias ll="ls -lh"
+alias feh="feh -F"
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="cd ~/.oh-my-zsh"
+
+# git
+alias add="git add"
+alias co="git commit -m"
+alias addp="git add -p"
+alias push="git push origin master"
+alias push-pages="git push origin gh-pages"
+alias status="git status"
+alias diff="git diff"
+alias rebasei="git rebase -i"
+
+alias get_iplayer="~/softs/get_iplayer/get_iplayer"
+alias serv="python -m SimpleHTTPServer"
+alias gn="geeknote"
+alias notesync="gnsync --path /home/b/notes --mask '*.md' --format 'markdown'"
+
+# ssh
+alias sshairwars="ssh basile@178.62.196.225"
+

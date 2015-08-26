@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/b/BBC/labs-internal-blog/_plugins'
+let g:netrw_dirhist_2='/home/b/Github/airwars.org/data'
+let g:netrw_dirhist_3='/home/b/.vim'
+let g:netrw_dirhist_4='/home/b/blog/_site/2015/01/11/airwars-language-study'
+let g:netrw_dirhist_5='/home/b/notes'
+let g:netrw_dirhist_6='/home/b/.vim/bundle/Vundle.vim'
