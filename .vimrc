@@ -111,3 +111,7 @@ let g:indent_guides_enable_on_vim_startup=1
 
 " Sets font
 set guifont=Input\ 11
+
+" Highlight whitespace
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
