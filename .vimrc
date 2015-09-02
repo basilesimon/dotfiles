@@ -115,3 +115,7 @@ set guifont=Input\ 11
 " Highlight whitespace
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
+
+" Convert to pandoc
+nnoremap <C-p> :!pandoc % -s -c buttondown.css -o %<.html
+vnoremap <C-p> :!pandoc % -s -c buttondown.css -o %<.html
