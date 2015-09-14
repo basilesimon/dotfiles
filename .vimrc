@@ -32,6 +32,7 @@ Plugin 'andviro/flake8-vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
+Plugin 'bling/vim-airline'
 
 " Indentation
 set expandtab
@@ -118,3 +119,8 @@ set guifont=Input\ 11
 
 " Send to pi
 command Sendpi execute "!pandoc % -s -c buttondown.css -o %<.html; sh /home/b/scripts/publish-notes.sh '%:r'.html"
+
+" Statusline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+set timeoutlen=50
