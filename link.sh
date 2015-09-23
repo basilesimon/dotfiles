@@ -1,10 +1,12 @@
 #/bin/sh
 
+mkdir ~/colorschemes
 echo "Link all dotfiles in /home..."
 for i in $(ls -A -I link.sh)
 do
-  ln -f -s $(pwd)/$i ~/$i
+  ln -f -s ~/dotfiles/$i ~/$i
 done
+  ln -f -s ~/dotfiles/colorschemes/solarized.py ~/colorschemes/solarized.py
 
 # Install Vundle
 # Launch vim and run :PluginInstall

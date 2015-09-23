@@ -1,0 +1,6 @@
+search config
+delete
+
+search conf
+open_with h
+shell 

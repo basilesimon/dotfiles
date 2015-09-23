@@ -25,3 +25,5 @@ alias notesync="gnsync --path /home/b/notes --mask '*.md' --format 'markdown'"
 # ssh
 alias sshairwars="ssh basile@178.62.196.225"
 
+# ranger, file explorer
+alias ranger="ranger --confdir=/home/b/"
