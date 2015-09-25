@@ -9,7 +9,7 @@ from ranger.gui.colorscheme import ColorScheme
 from ranger.gui.color import *
 
 class Solarized(ColorScheme):
-    progress_bar_color = 33
+    progress_bar_color = 32
 
     def use(self, context):
         fg, bg, attr = default_colors
@@ -27,16 +27,16 @@ class Solarized(ColorScheme):
                 fg = 235
                 bg = 160
             if context.border:
-                fg = default
+                fg = 239
             if context.media:
                 if context.image:
-                    fg = 136
+                    fg = 003
                 else:
                     fg = 166
             if context.container:
                 fg = 61
             if context.directory:
-                fg = 33
+                fg = 004
             elif context.executable and not \
                     any((context.media, context.container,
                         context.fifo, context.socket)):
@@ -87,7 +87,7 @@ class Solarized(ColorScheme):
                 if context.bad:
                     bg = 166
             elif context.directory:
-                fg = 33
+                fg = 32
             elif context.tab:
                 fg = context.good and 47 or 33
                 bg = 239
