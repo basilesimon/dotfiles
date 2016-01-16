@@ -27,7 +27,7 @@ bindkey '\e[1;5B' end-of-line # ctrl down
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to disable command auto-correction.
-# DISABLE_CORRECTION="true"
+DISABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -55,7 +55,7 @@ source ~/.aliases
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -87,3 +87,6 @@ plugins=(sudo)
 
 # Tmux scheme
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
+
+# Disable completion
+zstyle ':completion:*' hosts off
