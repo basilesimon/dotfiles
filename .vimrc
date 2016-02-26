@@ -118,9 +118,16 @@ set guifont=Input\ 11
 :match ExtraWhitespace /\s\+$/
 
 " Send to pi
-command Sendpi execute "!pandoc % -s -c buttondown.css -o %<.html; sh /home/b/scripts/publish-notes.sh '%:r'.html"
+" command Sendpi execute "!pandoc % -s -c buttondown.css -o %<.html; sh /home/b/scripts/publish-notes.sh '%:r'.html"
+command Publish execute "!pandoc % -s -c buttondown.css -o %<.html"
 
 " Statusline
 set laststatus=2
 let g:airline_powerline_fonts = 1
 set timeoutlen=50
+
+" Backslash+o toggles paste
+:nmap \o :set paste!<CR>
+
+" Switch between dark/light background
+map <F12> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
