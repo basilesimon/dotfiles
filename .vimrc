@@ -32,7 +32,8 @@ Plugin 'andviro/flake8-vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Indentation
 set expandtab
@@ -126,8 +127,8 @@ set laststatus=2
 let g:airline_powerline_fonts = 1
 set timeoutlen=50
 
-" Backslash+o toggles paste
-:nmap \o :set paste!<CR>
+" F9 toggles paste
+map <F9> :set paste!<CR>
 
 " Switch between dark/light background
 map <F12> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
