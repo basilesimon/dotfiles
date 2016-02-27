@@ -18,7 +18,7 @@ echo "Launch vim and run :PluginInstall"
 # Install ohmyzsh
 echo "Installing oh-my-zsh and themes..."
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-rm ~/.zshrc
-mv ~/.zshrc.pre-oh-my-zsh ~/.zshrc
+rm ~/.zshrc ~/.zshrc.pre-oh-my-zsh
+ln -f -s ~/dotfiles/.zshrc ~/.zshrc
 
 echo "done."
