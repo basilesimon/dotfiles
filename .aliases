@@ -27,3 +27,9 @@ alias sshairwars="ssh basile@178.62.196.225"
 
 # ranger, file explorer
 alias ranger="ranger --confdir=/home/b/"
+
+# rssowl
+alias rss="/home/b/softs/rssowl/RSSOwl"
+
+# bbc scaffold
+alias grunt-init='npm update -g npm; cd ~/.grunt-init/iframe-scaffold; git pull origin master; cd -;\grunt-init'
