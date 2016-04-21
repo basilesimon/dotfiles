@@ -34,6 +34,10 @@ Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" leader to comma
+let mapleader=","
 
 " Indentation
 set expandtab
@@ -119,7 +123,6 @@ set guifont=Input\ 11
 :match ExtraWhitespace /\s\+$/
 
 " Send to pi
-" command Sendpi execute "!pandoc % -s -c buttondown.css -o %<.html; sh /home/b/scripts/publish-notes.sh '%:r'.html"
 command Publish execute "!pandoc % -s -c buttondown.css -o %<.html"
 
 " Statusline
@@ -132,3 +135,10 @@ map <F9> :set paste!<CR>
 
 " Switch between dark/light background
 map <F12> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+" CtrlP settings
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
