@@ -35,6 +35,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 
 " leader to comma
 let mapleader=","
@@ -141,4 +143,10 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" Limelight settings
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 241
 
