@@ -37,6 +37,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
+Plugin 'editorconfig/editorconfig-vim'
 
 " leader to comma
 let mapleader=","
