@@ -24,6 +24,7 @@ bind up:${triple} ${tophalf}
 bind down:${triple} ${bottomhalf}
 bind c:${triple} ${center}
 bind v:${triple} ${bigCenter}
+bind f:${triple} ${full}
 bind down:${triple2} ${bottomleft}
 bind right:${triple2} ${bottomright}
 bind left:${triple2} ${topleft}
