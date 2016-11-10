@@ -26,19 +26,19 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
-Plugin 'godlygeek/tabular'
+" Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'andviro/flake8-vim'
-Plugin 'Raimondi/delimitMate'
+" Plugin 'andviro/flake8-vim'
+" Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
-Plugin 'pangloss/vim-javascript'
+" Plugin 'pangloss/vim-javascript'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'mxw/vim-jsx'
+" Plugin 'junegunn/limelight.vim'
+" Plugin 'editorconfig/editorconfig-vim'
+" Plugin 'mxw/vim-jsx'
 
 " leader to comma
 let mapleader=","
@@ -147,7 +147,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 241
+" let g:limelight_conceal_ctermfg = 241
 
 " Highlight line
 set cursorline

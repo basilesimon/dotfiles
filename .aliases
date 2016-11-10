@@ -3,9 +3,6 @@ alias install="sudo apt-get install"
 alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
 alias ll="ls -lh"
-alias feh="feh -F"
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="cd ~/.oh-my-zsh"
 
 # git
 alias add="git add"
@@ -18,7 +15,6 @@ alias diff="git diff"
 alias rebasei="git rebase -i"
 
 alias serv="python -m SimpleHTTPServer"
-alias notesync="gnsync --path /home/b/notes --mask '*.md' --format 'markdown'"
 
 # ssh
 alias sshairwars="ssh basile@178.62.196.225"
@@ -30,6 +26,3 @@ alias ranger="ranger --confdir=/Users/bsimon/"
 
 # rssowl
 alias rss="/home/b/softs/rssowl/RSSOwl"
-
-# bbc scaffold
-# alias grunt-init='npm update -g npm; cd ~/.grunt-init/iframe-scaffold; git pull origin master; cd -;\grunt-init'
