@@ -1,4 +1,6 @@
 .ssh
-.vim/bundle/*
+.vim/bundle/
 *.swp
+swp/
 history
+colorschemes/_*
