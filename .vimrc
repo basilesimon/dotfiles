@@ -29,7 +29,7 @@ Bundle 'jistr/vim-nerdtree-tabs'
 " Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'andviro/flake8-vim'
-" Plugin 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 " Plugin 'pangloss/vim-javascript'
 Plugin 'vim-airline/vim-airline'
@@ -39,6 +39,8 @@ Plugin 'junegunn/goyo.vim'
 " Plugin 'junegunn/limelight.vim'
 " Plugin 'editorconfig/editorconfig-vim'
 " Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 
 " leader to comma
 let mapleader=","
