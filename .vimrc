@@ -39,8 +39,9 @@ Plugin 'junegunn/goyo.vim'
 " Plugin 'junegunn/limelight.vim'
 " Plugin 'editorconfig/editorconfig-vim'
 " Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'terryma/vim-multiple-cursors'
 
 " leader to comma
 let mapleader=","
@@ -156,3 +157,11 @@ set cursorline
 
 " Highligt JSX also on .js files
 let g:jsx_ext_required = 0
+
+" Multiple cursors magic key is Ctrl+l
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-l>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
