@@ -23,7 +23,8 @@ filetype plugin indent on    " required
 " List of plugins managed by Vundle
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
+Plugin 'frankier/neovim-colors-solarized-truecolor-only'
 Plugin 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 " Plugin 'godlygeek/tabular'
@@ -42,9 +43,13 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-surround'
 
 " leader to comma
 let mapleader=","
+
+" encoding
+set encoding=utf-8
 
 " Indentation
 set expandtab
@@ -84,8 +89,10 @@ map k gk
 " Theme solarized dark
 syntax enable
 set t_Co=256
-colorscheme solarized
+" colorscheme solarized
+" set termguicolors
 set background=dark
+colorscheme solarized
 
 set rnu!
 
@@ -130,12 +137,38 @@ set guifont=Input\ 11
 :match ExtraWhitespace /\s\+$/
 
 " Send to pi
-command Publish execute "!pandoc % -s -c buttondown.css -o %<.html"
+" command Publish execute "!pandoc % -s -c buttondown.css -o %<.html"
 
 " Statusline
 set laststatus=2
 let g:airline_powerline_fonts = 1
-set timeoutlen=50
+set timeoutlen=500
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 " F9 toggles paste
 map <F9> :set paste!<CR>
@@ -158,10 +191,10 @@ set cursorline
 " Highligt JSX also on .js files
 let g:jsx_ext_required = 0
 
-" Multiple cursors magic key is Ctrl+l
+" Multiple cursors magic key is Ctrl+k
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
-let g:multi_cursor_next_key='<C-l>'
+let g:multi_cursor_next_key='<C-k>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
