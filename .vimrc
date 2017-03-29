@@ -89,10 +89,10 @@ map k gk
 " Theme solarized dark
 syntax enable
 set t_Co=256
-" colorscheme solarized
-" set termguicolors
-set background=dark
 colorscheme solarized
+set termguicolors
+set background=dark
+" colorscheme solarized
 
 set rnu!
 
