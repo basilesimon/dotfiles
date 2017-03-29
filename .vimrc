@@ -58,7 +58,7 @@ set softtabstop=2
 set autoindent
 
 " Number of lines
-set number
+set relativenumber
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -88,11 +88,11 @@ map k gk
 
 " Theme solarized dark
 syntax enable
-set t_Co=256
-" colorscheme solarized
-" set termguicolors
-set background=dark
+" set t_Co=256
 colorscheme solarized
+set termguicolors
+set background=dark
+" colorscheme solarized
 
 set rnu!
 
