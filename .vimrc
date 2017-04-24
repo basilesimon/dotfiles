@@ -57,8 +57,6 @@ set shiftwidth=2
 set softtabstop=2
 set autoindent
 
-" Number of lines
-set relativenumber
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -198,3 +196,6 @@ let g:multi_cursor_next_key='<C-k>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+" Number of lines
+set relativenumber
