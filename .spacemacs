@@ -39,11 +39,6 @@ values."
      emacs-lisp
      git
      osx
-     themes-megapack
-     (version-control :variables
-                        version-control-global-margin t
-                        version-control-diff-tool 'git-gutter
-                        )
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -63,7 +58,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '((prettier-js :location (recipe :fetcher url :url "https://gist.githubusercontent.com/troglotit/48da99263b0f4f1f24edf8e0db797027/raw/92a367cdd9f547634c050907cd9c1a5485cc0048/prettier-js.el")))
+   dotspacemacs-additional-packages '((prettier-js :location (recipe :fetcher url :url "https://gist.githubusercontent.com/troglotit/48da99263b0f4f1f24edf8e0db797027/raw/92a367cdd9f547634c050907cd9c1a5485cc0048/prettier-js.el")) solarized-theme)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -135,8 +130,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(sanityinc-solarized-dark
-                         sanityinc-solarized-light)
+   dotspacemacs-themes '(solarized-dark
+                         solarized-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state nil
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -331,7 +326,7 @@ you should place your code here."
   (setq ns-use-srgb-colorspace nil)
 
   ;; Make linums relative by default
-  (global-linum-mode nil)
+  ;;(global-linum-mode nil)
   (linum-relative-toggle)
 
   ;; Remove icons from neotree
@@ -353,6 +348,7 @@ you should place your code here."
   (setq-default js2-basic-offset 2
                 js-indent-level 2)
 
+  ;; Set JS Prettier plugin
   (setq prettier-target-mode "js2-mode")
   (setq prettier-args '(
                         "--single-quote" "true"
@@ -362,32 +358,13 @@ you should place your code here."
             (lambda ()
               (add-hook 'before-save-hook 'prettier-before-save nil t)))
 
-  ;;(progn
-  ;;  ;; Linum
-
-  ;;  ;; NOTE: the "relative" flag for "dotspacemacs-line-numbers 'relative"
-  ;;  ;; doesn't seem to be working, so we add the hooks here manually
-  ;;  (when (eq dotspacemacs-line-numbers 'relative)
-  ;;    (add-hook 'prog-mode-hook 'linum-relative-mode)
-  ;;    (add-hook 'text-mode-hook 'linum-relative-mode))
-
-  ;;  (setq-default
-  ;;   linum-format "%4d \u2502"
-  ;;   linum-relative-format "%4s \u2502"
-  ;;   ))
-
+  ;; Linum line format
+  ;; Adds a solid separator after line number
   (progn
-    ;; Git Gutter
-    (set-face-attribute
-     'git-gutter:added nil :background nil :foreground "green")
-    (set-face-attribute
-     'git-gutter:deleted nil :background nil :foreground "red")
-    (set-face-attribute
-     'git-gutter:modified nil :background nil :foreground "green")
-
-    (setq-default
-     git-gutter:modified-sign "~"
-     ))
+  (setq-default
+   linum-format "%4s \u2502"
+   linum-relative-format "%4s \u2502"
+   ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
