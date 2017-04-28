@@ -39,11 +39,11 @@ values."
      emacs-lisp
      git
      osx
+     vim-powerline
      (version-control :variables
                       version-control-diff-tool 'diff-hl
                       version-control-diff-side 'left
                       version-control-global-margin t)
-     vim-powerline
      (shell :variables
             shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/local/bin/zsh")
@@ -68,11 +68,13 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '((prettier-js :location (recipe :fetcher url :url "https://gist.githubusercontent.com/troglotit/48da99263b0f4f1f24edf8e0db797027/raw/92a367cdd9f547634c050907cd9c1a5485cc0048/prettier-js.el"))
                                       solarized-theme
-                                      highlight-indent-guides)
+                                      highlight-indent-guides
+                                      scss-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(highlight-parentheses)
+   dotspacemacs-delete-orphan-packages t
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -322,6 +324,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
   (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
   (setq-local css-indent-offset n) ; css-mode
+  (setq-local html-indent-level n) ; css-mode
   )
 
 (defun dotspacemacs/user-config ()
@@ -387,6 +390,9 @@ you should place your code here."
   (custom-set-faces
    '(show-paren-match ((t (:background "gold"))))
    '(show-paren-mismatch ((((class color)) (:background "red" :foreground "white")))))
+
+  ;; editorconfig-mode enabled
+  (editorconfig-mode 1)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
