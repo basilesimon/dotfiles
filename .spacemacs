@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     org
      python
      html
      javascript
@@ -205,7 +206,7 @@ values."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-auto-save-file-location 'nil
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
    ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
@@ -391,6 +392,21 @@ you should place your code here."
   (custom-set-faces
    '(show-paren-match ((t (:background "gold"))))
    '(show-paren-mismatch ((((class color)) (:background "red" :foreground "white")))))
+
+  (with-eval-after-load 'org
+    ;; here goes your Org config :)
+    ;; ....
+    (setq org-todo-keywords
+          '((sequence "TODO" "DONE")))
+    (setq org-agenda-custom-commands
+          '(("c" "Simple agenda view"
+             ((agenda "")
+              (alltodo "")))))
+    (setq org-agenda-files (list "~/org.org"
+                                 ))
+  )
+
+  (savehist-mode 0)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -403,11 +419,14 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (exec-path-from-shell sass-mode pug-mode mmm-mode less-css-mode js-doc emmet-mode coffee-mode js2-refactor yasnippet js2-mode async yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic mic-paren xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter diff-hl highlight-indent-guides prettier-js javascript-mode js-mode web-mode tagedit slim-mode helm-css-scss haml-mode solarized-theme color-theme-sanityinc-solarized smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit magit-gitflow launchctl helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors markdown-toc markdown-mode gh-md yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup))))
+    (org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot exec-path-from-shell sass-mode pug-mode mmm-mode less-css-mode js-doc emmet-mode coffee-mode js2-refactor yasnippet js2-mode async yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic mic-paren xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter diff-hl highlight-indent-guides prettier-js javascript-mode js-mode web-mode tagedit slim-mode helm-css-scss haml-mode solarized-theme color-theme-sanityinc-solarized smeargle reveal-in-osx-finder pbcopy osx-trash osx-dictionary orgit magit-gitflow launchctl helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors markdown-toc markdown-mode gh-md yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-level-1 ((t (:foreground "#cb4b16" :height 1.3 :family "Input"))))
+ '(org-level-2 ((t (:foreground "#859900" :height 1.2 :family "Input"))))
+ '(org-level-3 ((t (:foreground "#268bd2" :height 1.15 :family "Input"))))
  '(show-paren-match ((t (:background "gold"))))
  '(show-paren-mismatch ((((class color)) (:background "red" :foreground "white")))))
