@@ -80,7 +80,7 @@ alias g=". goto"
 
 # Dircolors
 # eval `dircolors ~/.dir_colors/dircolors.ansi-dark`
- eval `dircolors ~/.colors`
+# eval `dircolors ~/.colors`
 
 # Plugins
 plugins=(sudo)
@@ -97,9 +97,16 @@ export NVM_DIR="/home/b/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Virtualenv for Python
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# export PROJECT_HOME=$HOME/Devel
+# source /usr/local/bin/virtualenvwrapper.sh
 
 export NVM_DIR="$HOME/.nvm"
   . "$(brew --prefix nvm)/nvm.sh"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/bsimon/.nvm/versions/node/v6.5.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/bsimon/.nvm/versions/node/v6.5.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/bsimon/.nvm/versions/node/v6.5.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/bsimon/.nvm/versions/node/v6.5.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
