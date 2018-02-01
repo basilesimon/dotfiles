@@ -48,18 +48,17 @@ HIST_STAMPS="dd.mm.yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github sublime)
-
+# plugins=(git github sublime)
+# 
 source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 
 # User configuration
 
 export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
- export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
@@ -74,22 +73,18 @@ export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-### Goto, cd on steroids
-export PATH=$PATH:~/.local/bin/
-alias g=". goto"
-
 # Dircolors
 # eval `dircolors ~/.dir_colors/dircolors.ansi-dark`
 # eval `dircolors ~/.colors`
 
 # Plugins
-plugins=(sudo)
+# plugins=(sudo)
 
 # Tmux scheme
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
 
 # Disable completion
-zstyle ':completion:*' hosts off
+# zstyle ':completion:*' hosts off
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
