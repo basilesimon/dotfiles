@@ -13,8 +13,6 @@ chsh -s /bin/zsh
 echo "Installing wget oh-my-zsh and themes..."
 brew install wget
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-rm ~/.zshrc ~/.zshrc.pre-oh-my-zsh
-ln -f -s ~/dotfiles/.zshrc ~/.zshrc
 
 # Spacemacs
 echo "Installing emacs-plus..."
@@ -24,11 +22,11 @@ brew linkapps emacs-plus
 
 echo "Cloning syl20bnr/spacemacs..."
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-ln -f -s ~/.spacemacs ~/.spacemacs
+# ln -f -s ~/.spacemacs ~/.spacemacs
 
 echo "Importing snippets..."
 rm -r ~/.emacs.d/private/snippets
-ln -f -s ~/.emacs.d/private/snippets ~/.emacs.d/private/snippets
+# ln -f -s ~/dotfiles/.emacs.d/private/snippets ~/.emacs.d/private/snippets
 
 mkdir ~/colorschemes/
 echo "Link all dotfiles in /home..."
@@ -37,6 +35,8 @@ do
     ln -f -s ~/dotfiles/$i ~/$i
 done
 ln -f -s ~/dotfiles/colorschemes/solarized.py ~/colorschemes/solarized.py
+rm ~/.zshrc ~/.zshrc.pre-oh-my-zsh
+ln -f -s ~/dotfiles/.zshrc ~/.zshrc
 
 # Install Vundle
 # Launch vim and run :PluginInstall
