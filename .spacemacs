@@ -49,8 +49,8 @@ values."
      (shell :variables
             shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/local/bin/zsh")
-     (auto-completion :variables
-                      auto-completion-enable-snippets-in-popup t)
+      (auto-completion :variables
+                       auto-completion-enable-snippets-in-popup t)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -408,14 +408,18 @@ you should place your code here."
     (setq org-agenda-custom-commands
           '(("c" "Simple agenda view"
              ((agenda "")))))
-    (setq org-agenda-files (list "~/org.org"
-                                 ))
+    ;; (setq org-agenda-files (list "~/org/org.org"
+    ;;                              "~/org/archive.org"
+    ;;                              ))
   )
 
   (savehist-mode 0)
 
   (fset 'evil-visual-update-x-selection 'ignore)
-  )
+  (require 'helm-bookmark)
+
+  (spacemacs|disable-company org-mode)
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
