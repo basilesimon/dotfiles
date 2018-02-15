@@ -42,8 +42,22 @@ ln -f -s ~/dotfiles/.zshrc ~/.zshrc
 # Launch vim and run :PluginInstall
 echo "Installing Vundle..."
 rm -rf ~/dotfiles/.vim/bundle/Vundle.vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/dotfiles/.vim/bundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo "Launch vim and run :PluginInstall"
+
+# Install slate
+cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
+
+# dev
+brew install nvm yarn
+nvm install 8
+nvm use 8
+npm install -g yo prettier http-server
+
+# more installs
+brew install r
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
 
 echo "Cleaning up..."
 rm -rf ~/.git
