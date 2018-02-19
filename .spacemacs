@@ -413,16 +413,22 @@ you should place your code here."
     ;;                              "~/org/archive.org"
     ;;                              ))
   )
+  ;; no autocomplete in org pls
+  (spacemacs|disable-company org-mode)
 
+  ;; weird fixes
   (savehist-mode 0)
-
   (fset 'evil-visual-update-x-selection 'ignore)
   (require 'helm-bookmark)
 
-  (spacemacs|disable-company org-mode)
-
+  ;; separate kill ring and macOS clipboards
+  ;; Cmd+c/v are system clipboard,
+  ;; d/y in evil stay inside emacs
   (require 'simpleclip)
   (simpleclip-mode 1)
+
+  ;; remap comment to Meta-/
+  (global-set-key (kbd "M-/") 'comment-dwim)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
