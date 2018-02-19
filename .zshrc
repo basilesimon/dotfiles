@@ -49,7 +49,6 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # plugins=(git github sublime)
-# 
 source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 
@@ -86,8 +85,6 @@ export LANG=en_US.UTF-8
 # Disable completion
 # zstyle ':completion:*' hosts off
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 export NVM_DIR="/home/b/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
@@ -96,8 +93,8 @@ export NVM_DIR="/home/b/.nvm"
 # export PROJECT_HOME=$HOME/Devel
 # source /usr/local/bin/virtualenvwrapper.sh
 
-export NVM_DIR="$HOME/.nvm"
-  . "$(brew --prefix nvm)/nvm.sh"
+# export NVM_DIR="$HOME/.nvm"
+#   . "$(brew --prefix nvm)/nvm.sh"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
