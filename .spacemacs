@@ -409,6 +409,7 @@ you should place your code here."
     (setq org-agenda-custom-commands
           '(("c" "Simple agenda view"
              ((agenda "")))))
+    (setq org-agenda-files (list "~/org.org"))
     ;; (setq org-agenda-files (list "~/org/org.org"
     ;;                              "~/org/archive.org"
     ;;                              ))
@@ -428,7 +429,7 @@ you should place your code here."
   (simpleclip-mode 1)
 
   ;; remap comment to Meta-/
-  (global-set-key (kbd "M-/") 'comment-dwim)
+  (global-set-key (kbd "M-;") 'comment-dwim)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
