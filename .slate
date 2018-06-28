@@ -31,5 +31,5 @@ bind left:${triple2} ${topleft}
 bind up:${triple2} ${topright}
 
 # Monitor switching bindings
-bind right:alt,ctrl throw 1 resize
-bind left:alt,ctrl throw 0 resize
+bind right:alt,ctrl throw 1
+bind left:alt,ctrl throw 0
