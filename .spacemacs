@@ -376,7 +376,7 @@ you should place your code here."
                            "--single-quote" "true"
                            ))
   (add-hook 'js2-mode-hook 'prettier-js-mode)
-  ;; (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'scss-mode-hook 'prettier-js-mode)
 
   ;; Linum line format
   ;; Adds a solid separator after line number
