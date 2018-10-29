@@ -54,7 +54,7 @@ source ~/.aliases
 
 # User configuration
 
-export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -102,3 +102,5 @@ export NVM_DIR="/home/b/.nvm"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/bsimon/.nvm/versions/node/v6.5.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/bsimon/.nvm/versions/node/v6.5.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+eval "$(pyenv init -)"
