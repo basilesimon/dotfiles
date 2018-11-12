@@ -5,10 +5,9 @@
 
 // Libraries
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Styles
-//import style from './style.scss';
+import style from './style.scss';
 
 export class $1 extends React.Component {
 render() {
@@ -16,9 +15,10 @@ return (
 <div
 className={style.something}
 >
+$1
 </div>
 );
 }
 }
 
-export default withStyles(style)($1);
+export default ($1);
