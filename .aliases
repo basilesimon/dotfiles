@@ -7,12 +7,9 @@ alias ll="ls -lh"
 # git
 alias add="git add"
 alias co="git commit -m"
-alias addp="git add -p"
 alias push="git push origin master"
-alias push-pages="git push origin gh-pages"
 alias status="git status"
 alias diff="git diff"
-alias rebasei="git rebase -i"
 
 alias serv="python -m SimpleHTTPServer"
 
@@ -24,5 +21,4 @@ alias sshairwars="ssh basile@178.62.196.225"
 # alias ranger="ranger --confdir=/home/b/"
 alias ranger="ranger --confdir=/Users/bsimon/"
 
-# rssowl
-alias rss="/home/b/softs/rssowl/RSSOwl"
+alias em="TERM=xterm-24bits emacs -nw"

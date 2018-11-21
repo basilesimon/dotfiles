@@ -411,7 +411,7 @@ you should place your code here."
     (setq org-agenda-custom-commands
           '(("c" "Simple agenda view"
              ((agenda "")))))
-    (setq org-agenda-files (list "~/org.org"))
+    (setq org-agenda-files (list "~/org/org.org"))
     ;; (setq org-agenda-files (list "~/org/org.org"
     ;;                              "~/org/archive.org"
     ;;                              ))

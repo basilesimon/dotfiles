@@ -59,6 +59,9 @@ brew install r
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 
+# colors in terminal emacs
+tic -x -o ~/.terminfo ~/dotfiles/terminfo-24bit.src
+
 echo "Cleaning up..."
 rm -rf ~/.git
 
