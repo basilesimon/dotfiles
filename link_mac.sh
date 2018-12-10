@@ -37,6 +37,7 @@ ln -f -s ~/dotfiles/colorschemes/solarized.py ~/colorschemes/solarized.py
 rm ~/.zshrc ~/.zshrc.pre-oh-my-zsh
 ln -f -s ~/dotfiles/.zshrc ~/.zshrc
 mkdir ~/emacs.d/private
+ln -f - ~/dotfiles/init.el ~/.emacs.d/init.el
 ln -f -s ~/dotfiles/snippets ~/.emacs.d/private/snippets
 
 # Install Vundle
