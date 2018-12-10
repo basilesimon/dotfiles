@@ -134,7 +134,15 @@
     :ensure t
     :config
     (add-hook 'magit-mode-hook 'evil-local-mode)
-    (add-hook 'git-rebase-mode-hook 'evil-local-mode))
+    (add-hook 'git-rebase-mode-hook 'evil-local-mode)
+    (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
+        (let ((mm-key ","))
+          (dolist (state '(normal motion))
+            (evil-define-key state with-editor-mode-map
+              (concat mm-key mm-key) 'with-editor-finish
+              (concat mm-key "a")    'with-editor-cancel
+              (concat mm-key "c")    'with-editor-finish
+	      (concat mm-key "k") 'with-editor-cancel))))
   (use-package magit-popup
     :ensure t))
 
@@ -197,7 +205,7 @@
   "SPC" '(counsel-M-x :which-key "M-x")
   "ff"  '(counsel-find-file :which-key "find files")
   "ft"  '(neotree-toggle :which-key "neotree")
-  "fed" '((lambda () (interactive) (counsel-find-file "~/.emacs.d/init.el")) :which-key "edit init")
+  "fed" '((lambda () (interactive) (counsel-find-file "~/dotfiles/init.el")) :which-key "edit init")
   ;; Buffers
   "bb"  '(ivy-switch-buffer :which-key "buffers list")
   "bd"  '(kill-this-buffer :which-key "kill current buffer")
