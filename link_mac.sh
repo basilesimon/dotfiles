@@ -26,7 +26,6 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
 echo "Importing snippets..."
 rm -r ~/.emacs.d/private/snippets
-# ln -f -s ~/dotfiles/.emacs.d/private/snippets ~/.emacs.d/private/snippets
 
 mkdir ~/colorschemes/
 echo "Link all dotfiles in /home..."
@@ -37,13 +36,15 @@ done
 ln -f -s ~/dotfiles/colorschemes/solarized.py ~/colorschemes/solarized.py
 rm ~/.zshrc ~/.zshrc.pre-oh-my-zsh
 ln -f -s ~/dotfiles/.zshrc ~/.zshrc
+mkdir ~/emacs.d/private
+ln -f -s ~/dotfiles/snippets ~/.emacs.d/private/snippets
 
 # Install Vundle
 # Launch vim and run :PluginInstall
-echo "Installing Vundle..."
-rm -rf ~/dotfiles/.vim/bundle/Vundle.vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-echo "Launch vim and run :PluginInstall"
+# echo "Installing Vundle..."
+# rm -rf ~/dotfiles/.vim/bundle/Vundle.vim
+# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# echo "Launch vim and run :PluginInstall"
 
 # Install slate
 cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
