@@ -24,9 +24,6 @@
     (package-install 'use-package))
 (require 'use-package)
 
-;; Start off with some sanity.
-;; (require better-defaults)
-
 ;; Vim mode
 ;; first line is witchcraft
 ;; and fixes tab to expand in org mode
@@ -35,18 +32,31 @@
   :ensure t
   :config
   (setq evil-default-cursor t)
-  (setq evil-insert-state-cursor '(bar "white")
-      evil-emacs-state-cursor '(bar "white")
-      evil-normal-state-cursor '(hbar "#97C150"))
+  (setq evil-insert-state-cursor '(box "white")
+      evil-emacs-state-cursor '(box "white")
+      evil-normal-state-cursor '(box "#97C150"))
   (evil-mode 1))
+
+;; relative line numbering
+(use-package nlinum
+  :ensure t
+  :config (add-hook 'prog-mode-hook '(lambda ()
+				       (nlinum-mode t))))
 
 (use-package evil-surround
   :ensure t
-  :config (global-evil-surround-mode 1))
+  :config
+  (progn
+      (global-evil-surround-mode 1)
+      ;; `s' for surround instead of `substitute'
+      ;; see motivation for this change in the documentation
+      (evil-define-key 'visual evil-surround-mode-map "s" 'evil-surround-region)
+      (evil-define-key 'visual evil-surround-mode-map "S" 'evil-substitute)))
 
 ;; Which Key
 (use-package which-key
   :ensure t
+  :diminish which-key-mode
   :init
   (setq which-key-separator " ")
   (setq which-key-prefix-prefix "+")
@@ -111,14 +121,48 @@
 
 (use-package solarized-theme
   :ensure t
-  :init (load-theme 'solarized-dark t))
+  :init
+  (progn
+    (setq solarized-use-less-bold t
+	  solarized-emphasize-indicators nil)
+    (load-theme 'solarized-dark t)))
+;; Spaceline - A mode line
+(use-package spaceline
+  :ensure t
+  :init
+  (require 'spaceline-config)
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  (setq powerline-default-separator 'arrow-fade)
+  (setq ns-use-srgb-colorspace nil)
+  (setq powerline-default-separator 'utf-8)
+  :config
+  (progn
+    (spaceline-spacemacs-theme)
+    (spaceline-toggle-minor-modes-off)
+    (spaceline-toggle-hud-off)
+    (spaceline-toggle-version-control-on)
+    (spaceline-toggle-org-clock-on)
+    (spaceline-toggle-buffer-modified-on)
+    (spaceline-toggle-line-column-off)))
+;; powerline
+;; (use-package powerline
+;;   :init
+;;   (powerline-evil-vim-color-theme)
+;;   :config
+;;   (setq powerline-default-separator 'utf-8))
+;; (add-hook 'after-init-hook 'powerline-reset)
+;; 
+;; (use-package powerline-evil
+;;     :ensure powerline-evil
+;;     :demand powerline-evil)
 
 (use-package highlight-indent-guides
   :diminish
   :hook (prog-mode . highlight-indent-guides-mode)
   :config
   (setq highlight-indent-guides-method 'fill)
-  (setq highlight-indent-guides-responsive t))
+  (setq highlight-indent-guides-responsive t)
+  (setq indent-guide-recursive t))
 
 ;; Highlight the current line
 (use-package hl-line
@@ -155,8 +199,14 @@
     (require 'smartparens-config)
     (smartparens-global-mode 1)))
 
+(use-package autorevert
+  :diminish auto-revert-mode)
+(use-package undo-tree
+  :diminish undo-tree-mode)
+
 ;; snippets
 (use-package yasnippet
+  :diminish yas-minor-mode
   :ensure t
   :config
   (setq yas-snippet-dirs
@@ -182,17 +232,10 @@
   (progn
     (add-hook 'js2-mode-hook 'prettier-js-mode)))
 
-;; ;; powerline
-;; (use-package powerline
-;;   :init
-;;   (powerline-evil-center-color-theme))
-;; (add-hook 'after-init-hook 'powerline-reset)
-;; 
-;; (use-package powerline-evil)
-;; 
-;; (use-package evil-matchit
-;;   :diminish t
-;;   :init (global-evil-matchit-mode 1))
+(defun bs/load-init ()
+  "Reloads init file"
+  (interactive)
+  (load-file "~/.emacs.d/init.el"))
 
 ;; Custom keybinding
 (use-package general
@@ -206,6 +249,7 @@
   "ff"  '(counsel-find-file :which-key "find files")
   "ft"  '(neotree-toggle :which-key "neotree")
   "fed" '((lambda () (interactive) (counsel-find-file "~/dotfiles/init.el")) :which-key "edit init")
+  "feR" '(bs/load-init :which-key "reload init")
   ;; Buffers
   "bb"  '(ivy-switch-buffer :which-key "buffers list")
   "bd"  '(kill-this-buffer :which-key "kill current buffer")
@@ -223,7 +267,8 @@
   ;; Others
   "gs" '(magit-status :which-key "git status")
   "gm" '(magit-dispatch-popup :which-key "git status")
-  "t" '(counsel-load-theme :which-key "change theme")
+  "t"  '(counsel-load-theme :which-key "change theme")
+  "ll" '(nlinum-mode :which-key "toggle line numbering")
 ))
 
 
@@ -256,7 +301,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
