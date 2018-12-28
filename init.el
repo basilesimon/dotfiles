@@ -4,7 +4,7 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 
-(add-to-list 'default-frame-alist '(font . "Input-12"))
+(add-to-list 'default-frame-alist '(font . "Input-13"))
 (add-to-list 'default-frame-alist '(height . 100))
 (add-to-list 'default-frame-alist '(width . 80))
 
@@ -43,6 +43,13 @@
   :config (add-hook 'prog-mode-hook '(lambda ()
 				       (nlinum-mode t))))
 
+(use-package nlinum-relative
+  :config
+  (nlinum-relative-setup-evil)
+  (setq linum-relative-redisplay-delay 0)
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+
+;; surround selection with 's'
 (use-package evil-surround
   :ensure t
   :config
@@ -70,7 +77,11 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virutal-bufferst t)
-  (setq ivy-height 10))
+  (setq ivy-height 20)
+  ;; a single ESC quits virtual buffers
+  (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
+  )
+
 
 ;; counsel
 (use-package counsel
@@ -91,7 +102,7 @@
   (add-hook 'neotree-mode-hook
               (lambda ()
                 (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
-                (define-key evil-normal-state-local-map (kbd "gr") 'neotree-refresh)
+                (define-key evil-normal-state-local-map (kbd "r") 'neotree-refresh)
                 (define-key evil-normal-state-local-map (kbd "j") 'neotree-next-line)
                 (define-key evil-normal-state-local-map (kbd "k") 'neotree-previous-line)
                 (define-key evil-normal-state-local-map (kbd "R") 'neotree-change-root)
@@ -101,11 +112,18 @@
                 (define-key evil-normal-state-local-map (kbd "K") 'neotree-select-up-node)
                 (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle))))
 
+;; org-mode exports to reaveal presentations
 (use-package ox-reveal
   :ensure ox-reveal)
-
 (use-package htmlize
   :ensure t)
+
+;; diff markers in left-hand side
+(use-package diff-hl
+  :init
+  (global-diff-hl-mode)
+  :config
+  (add-hook 'vc-checkin-hook 'diff-hl-update))
 
 (use-package org
   :ensure t
@@ -119,6 +137,7 @@
         '(("TODO" . "#dc322f") ("DONE" . "#859900")))
   (setq org-agenda-files (list "~/org/org.org"))))
 
+;; solarized
 (use-package solarized-theme
   :ensure t
   :init
@@ -126,6 +145,7 @@
     (setq solarized-use-less-bold t
 	  solarized-emphasize-indicators nil)
     (load-theme 'solarized-dark t)))
+
 ;; Spaceline - A mode line
 (use-package spaceline
   :ensure t
@@ -144,24 +164,13 @@
     (spaceline-toggle-org-clock-on)
     (spaceline-toggle-buffer-modified-on)
     (spaceline-toggle-line-column-off)))
-;; powerline
-;; (use-package powerline
-;;   :init
-;;   (powerline-evil-vim-color-theme)
-;;   :config
-;;   (setq powerline-default-separator 'utf-8))
-;; (add-hook 'after-init-hook 'powerline-reset)
-;; 
-;; (use-package powerline-evil
-;;     :ensure powerline-evil
-;;     :demand powerline-evil)
 
 (use-package highlight-indent-guides
   :diminish
   :hook (prog-mode . highlight-indent-guides-mode)
   :config
   (setq highlight-indent-guides-method 'fill)
-  (setq highlight-indent-guides-responsive t)
+  (setq highlight-indent-guides-responsive nil)
   (setq indent-guide-recursive t))
 
 ;; Highlight the current line
@@ -246,14 +255,18 @@
   :non-normal-prefix "M-SPC"
   ;; "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
   "SPC" '(counsel-M-x :which-key "M-x")
+  "f"   '(:which-key "files")
   "ff"  '(counsel-find-file :which-key "find files")
   "ft"  '(neotree-toggle :which-key "neotree")
+  "fe"  '(:which-key "init files")
   "fed" '((lambda () (interactive) (counsel-find-file "~/dotfiles/init.el")) :which-key "edit init")
   "feR" '(bs/load-init :which-key "reload init")
   ;; Buffers
+  "b"   '(:which-key "buffers")
   "bb"  '(ivy-switch-buffer :which-key "buffers list")
   "bd"  '(kill-this-buffer :which-key "kill current buffer")
   ;; Window
+  "w"   '(:which-key "window")
   "wl"  '(windmove-right :which-key "move right")
   "wh"  '(windmove-left :which-key "move left")
   "wk"  '(windmove-up :which-key "move up")
@@ -261,14 +274,19 @@
   "w/"  '(split-window-right :which-key "split right")
   "w-"  '(split-window-below :which-key "split bottom")
   ;; Org
+  "m"  '(:which-key "org")
   "mI" '(org-clock-in :which-key "org clock in")
   "mO" '(org-clock-out :which-key "org clock out")
-  "me" '(org-export-dispath :which-key "org despatch")
+  "me" '(org-export-dispatch :which-key "org despatch")
+  "mn" '(org-narrow-to-subtree :which-key "org narrow")
+  "mN" '(widen :which-key "org widen")
   ;; Others
+  "g"  '(:which-key "magit")
   "gs" '(magit-status :which-key "git status")
   "gm" '(magit-dispatch-popup :which-key "git status")
-  "t"  '(counsel-load-theme :which-key "change theme")
-  "ll" '(nlinum-mode :which-key "toggle line numbering")
+  "t"  '(:which-key "toggles")
+  "tt"  '(counsel-load-theme :which-key "change theme")
+  "tl" '(nlinum-mode :which-key "toggle line numbering")
 ))
 
 
@@ -301,7 +319,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
