@@ -60,6 +60,13 @@
       (evil-define-key 'visual evil-surround-mode-map "s" 'evil-surround-region)
       (evil-define-key 'visual evil-surround-mode-map "S" 'evil-substitute)))
 
+;; multiple cursors
+(use-package evil-mc
+  :ensure t
+  :config
+  (global-evil-mc-mode  1))
+
+
 ;; Which Key
 (use-package which-key
   :ensure t
@@ -280,6 +287,12 @@
   "me" '(org-export-dispatch :which-key "org despatch")
   "mn" '(org-narrow-to-subtree :which-key "org narrow")
   "mN" '(widen :which-key "org widen")
+  ;; cursors
+  "c"  '(:which-key "cursors")
+  "cu"  '(evil-mc-undo-all-cursors :which-key "undo all")
+  "cj"  '(evil-mc-make-cursor-move-next-line :which-key "undo all")
+  "ck"  '(evil-mc-make-cursor-move-prev-line :which-key "undo all")
+  "cma"  '(evil-mc-undo-all-cursors :which-key "make all")
   ;; Others
   "g"  '(:which-key "magit")
   "gs" '(magit-status :which-key "git status")
@@ -314,12 +327,13 @@
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(line-number-mode nil)
  '(org-babel-load-languages (quote ((emacs-lisp . t) (R . t))))
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
