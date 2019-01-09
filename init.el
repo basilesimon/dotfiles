@@ -248,6 +248,14 @@
   (progn
     (add-hook 'js2-mode-hook 'prettier-js-mode)))
 
+(use-package tramp
+  :defer t
+  :config
+  (progn
+    (with-eval-after-load 'tramp-cache
+      (setq tramp-persistency-file-name "~/.emacs.d/etc/tramp"))
+    ))
+
 (defun bs/load-init ()
   "Reloads init file"
   (interactive)
