@@ -140,9 +140,15 @@
     (setq org-directory "~/org")
     (setq org-todo-keywords
 	  '((sequence "TODO" "DONE")))
-  (setq org-todo-keyword-faces
-        '(("TODO" . "#dc322f") ("DONE" . "#859900")))
-  (setq org-agenda-files (list "~/org/org.org"))))
+    (setq org-todo-keyword-faces
+          '(("TODO" . "#dc322f") ("DONE" . "#859900")))
+    (setq org-agenda-files (list "~/org/org.org"))
+    (setq org-capture-templates
+	  '(("t" "todo" entry (file+headline "~/org/org.org" "todo")
+             "* TODO %?\n  %i\n")
+	    ("m" "meeting" entry (file+headline "~/org/org.org" "meetings")
+             "* TODO %?\n  %i\n")
+	    ))))
 
 ;; solarized
 (use-package solarized-theme
@@ -290,11 +296,13 @@
   "w-"  '(split-window-below :which-key "split bottom")
   ;; Org
   "m"  '(:which-key "org")
+  "ma" '(org-agenda :which-key "org agenda")
   "mI" '(org-clock-in :which-key "org clock in")
   "mO" '(org-clock-out :which-key "org clock out")
   "me" '(org-export-dispatch :which-key "org despatch")
   "mn" '(org-narrow-to-subtree :which-key "org narrow")
   "mN" '(widen :which-key "org widen")
+  "mc" '(counsel-org-capture :which-key "org capture")
   ;; cursors
   "c"  '(:which-key "cursors")
   "cu"  '(evil-mc-undo-all-cursors :which-key "undo all")
