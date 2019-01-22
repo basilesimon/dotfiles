@@ -98,14 +98,12 @@
 ;; NeoTree
 (use-package neotree
   :config
-  (progn
   ;;  will try to find current file and jump to node.
   (setq-default neo-smart-open t)
   ;; Do not allow neotree to be the only open window
-  (setq-default neo-dont-be-alone t))
+  (setq-default neo-dont-be-alone t)
   (setq neo-show-hidden-files t)
-  (progn
-    (setq neo-theme 'nerd))
+  (setq neo-theme 'nerd)
   (add-hook 'neotree-mode-hook
               (lambda ()
                 (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
@@ -117,6 +115,8 @@
                 (define-key evil-normal-state-local-map (kbd "C") 'neotree-copy-node)
                 (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
                 (define-key evil-normal-state-local-map (kbd "K") 'neotree-select-up-node)
+                (define-key evil-normal-state-local-map (kbd "-") 'neotree-enter-horizontal-split)
+                (define-key evil-normal-state-local-map (kbd "|") 'neotree-enter-vertical-split)
                 (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle))))
 
 ;; org-mode exports to reaveal presentations
@@ -142,7 +142,7 @@
 	  '((sequence "TODO" "DONE")))
     (setq org-todo-keyword-faces
           '(("TODO" . "#dc322f") ("DONE" . "#859900")))
-    (setq org-agenda-files (list "~/org/org.org"))
+    (setq org-agenda-files (list "~/org/org.org" "~/org/fwd.org"))
     (setq org-capture-templates
 	  '(("t" "todo" entry (file+headline "~/org/org.org" "todo")
              "* TODO %?\n  %i\n")
@@ -254,6 +254,12 @@
   (progn
     (add-hook 'js2-mode-hook 'prettier-js-mode)))
 
+(use-package mhtml-mode
+  :ensure t
+  :config
+  (progn
+    (add-hook 'js2-mode-hook 'prettier-js-mode)))
+
 (use-package tramp
   :defer t
   :config
@@ -266,6 +272,13 @@
   "Reloads init file"
   (interactive)
   (load-file "~/.emacs.d/init.el"))
+
+(defun bs/new-buffer ()
+  "Creates new empty buffer"
+  (interactive)
+  (let ((buffer (generate-new-buffer "untitled")))
+    (set-buffer-major-mode buffer)
+    (display-buffer buffer '(display-buffer-pop-up-frame . nil))))
 
 ;; Custom keybinding
 (use-package general
@@ -286,6 +299,7 @@
   "b"   '(:which-key "buffers")
   "bb"  '(ivy-switch-buffer :which-key "buffers list")
   "bd"  '(kill-this-buffer :which-key "kill current buffer")
+  "bs"  '(bs/new-buffer :which-jey "new buffer")
   ;; Window
   "w"   '(:which-key "window")
   "wl"  '(windmove-right :which-key "move right")
@@ -303,6 +317,7 @@
   "mn" '(org-narrow-to-subtree :which-key "org narrow")
   "mN" '(widen :which-key "org widen")
   "mc" '(counsel-org-capture :which-key "org capture")
+  "ms" '(org-schedule :which-key "org schedule")
   ;; cursors
   "c"  '(:which-key "cursors")
   "cu"  '(evil-mc-undo-all-cursors :which-key "undo all")
