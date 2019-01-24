@@ -24,6 +24,10 @@
     (package-install 'use-package))
 (require 'use-package)
 
+;; fix GUI lost with package paths
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 ;; Vim mode
 ;; first line is witchcraft
 ;; and fixes tab to expand in org mode
@@ -254,12 +258,6 @@
   (progn
     (add-hook 'js2-mode-hook 'prettier-js-mode)))
 
-(use-package mhtml-mode
-  :ensure t
-  :config
-  (progn
-    (add-hook 'js2-mode-hook 'prettier-js-mode)))
-
 (use-package tramp
   :defer t
   :config
@@ -349,6 +347,9 @@
 ;; disable startup screen
 (setq inhibit-startup-screen t)
 
+;; shit fix for GUI: allow hash to be entered  
+(global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -364,7 +365,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
