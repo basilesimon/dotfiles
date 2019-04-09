@@ -1,6 +1,6 @@
 [user]
-	name = basilesimon
-	email = basile@basilesimon.fr
+	name = Basile Simon
+	email = basile.simon@thomsonreuters.com
 [credential]
 	helper = cache --timeout=3600
 [color]

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: gettext
+# key: gettext
+# --
+<p><%= gettext("$1")%></p>

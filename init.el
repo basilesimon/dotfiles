@@ -93,7 +93,6 @@
   (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
   )
 
-
 ;; counsel
 (use-package counsel
   :requires ivy
@@ -266,6 +265,23 @@
       (setq tramp-persistency-file-name "~/.emacs.d/etc/tramp"))
     ))
 
+(use-package company
+  :ensure t
+  :defer t
+  :init (global-company-mode)
+  :config
+  (progn
+    ;; Use Company for completion
+    (bind-key [remap completion-at-point] #'company-complete company-mode-map)
+
+    (setq company-tooltip-align-annotations t
+          ;; Easy navigation to candidates with M-<n>
+          company-show-numbers t)
+    (setq company-dabbrev-downcase nil)
+    (setq-default company-tooltip-minimum-width 15)
+    (setq-default company-idle-delay 0.1))
+  :diminish company-mode)
+
 (defun bs/load-init ()
   "Reloads init file"
   (interactive)
@@ -328,7 +344,9 @@
   "gm" '(magit-dispatch-popup :which-key "git status")
   "t"  '(:which-key "toggles")
   "tt"  '(counsel-load-theme :which-key "change theme")
+  "tr" '(toggle-truncate-lines :which-key "toggle truncate")
   "tl" '(nlinum-mode :which-key "toggle line numbering")
+  "pp" '(prettier-js :which-key "prettier run")
 ))
 
 
@@ -348,8 +366,11 @@
 (setq inhibit-startup-screen t)
 
 ;; shit fix for GUI: allow hash to be entered  
-(global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+;; (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+(setq ns-right-alternate-modifier (quote none))
 
+;; prevent emacs from quitting too easily
+(setq confirm-kill-emacs 'y-or-n-p)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -365,7 +386,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

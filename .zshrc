@@ -91,4 +91,4 @@ export NVM_DIR="/home/b/.nvm"
 # export NVM_DIR="$HOME/.nvm"
 #   . "$(brew --prefix nvm)/nvm.sh"
 
-# eval "$(pyenv init -)"
+eval "$(pyenv init -)"

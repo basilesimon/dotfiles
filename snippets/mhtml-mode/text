@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: text
+# key: text
+# --
+<p class="">
+   <%- gettext(` $1 `)%>
+</p>
