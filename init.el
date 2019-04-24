@@ -282,6 +282,10 @@
     (setq-default company-idle-delay 0.1))
   :diminish company-mode)
 
+(use-package simpleclip :ensure t
+  :config
+  (simpleclip-mode 1))
+
 (defun bs/load-init ()
   "Reloads init file"
   (interactive)
@@ -292,7 +296,7 @@
   (interactive)
   (let ((buffer (generate-new-buffer "untitled")))
     (set-buffer-major-mode buffer)
-    (display-buffer buffer '(display-buffer-pop-up-frame . nil))))
+    (display-buffer buffer )))
 
 ;; Custom keybinding
 (use-package general
@@ -387,7 +391,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
