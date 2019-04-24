@@ -365,9 +365,10 @@
 ;; disable startup screen
 (setq inhibit-startup-screen t)
 
-;; shit fix for GUI: allow hash to be entered  
-;; (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
-(setq ns-right-alternate-modifier (quote none))
+;; on mac, make Alt (meta, M-) on the right-hand side Alt key only
+;; left key does standard stuff, eg M-[ for curly braces
+(setq ns-alternate-modifier 'none)
+(setq ns-right-alternate-modifier 'meta)
 
 ;; prevent emacs from quitting too easily
 (setq confirm-kill-emacs 'y-or-n-p)
