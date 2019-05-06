@@ -55,6 +55,7 @@ source ~/.aliases
 # User configuration
 
 export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:"
+export PATH=$PATH:/usr/local/bin/prettier
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
