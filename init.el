@@ -26,7 +26,7 @@
 
 ;; fix GUI lost with package paths
 (when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+ (exec-path-from-shell-initialize))
 
 ;; Vim mode
 ;; first line is witchcraft
