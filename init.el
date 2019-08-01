@@ -377,6 +377,9 @@
 ;; prevent emacs from quitting too easily
 (setq confirm-kill-emacs 'y-or-n-p)
 
+;; open org on startup
+(find-file "~/org/org.org")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
