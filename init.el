@@ -286,6 +286,13 @@
   :config
   (simpleclip-mode 1))
 
+(use-package lorem-ipsum
+  :ensure t
+  :config
+  (progn
+    (setq-default lorem-ipsum-use-default-bindings))
+  )
+
 (defun bs/load-init ()
   "Reloads init file"
   (interactive)
@@ -296,7 +303,8 @@
   (interactive)
   (let ((buffer (generate-new-buffer "untitled")))
     (set-buffer-major-mode buffer)
-    (display-buffer buffer )))
+    (display-buffer buffer )
+    (other-window 1)))
 
 ;; Custom keybinding
 (use-package general
@@ -351,6 +359,8 @@
   "tr" '(toggle-truncate-lines :which-key "toggle truncate")
   "tl" '(nlinum-mode :which-key "toggle line numbering")
   "pp" '(prettier-js :which-key "prettier run")
+  "lp" '(lorem-ipsum-insert-paragraphs :which-key "insert lipsum paras")
+  "ls" '(lorem-ipsum-insert-sentences :which-key "insert lipsum sentences")
 ))
 
 
@@ -394,7 +404,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
