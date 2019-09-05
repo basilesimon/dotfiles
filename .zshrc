@@ -93,3 +93,4 @@ export NVM_DIR="/home/b/.nvm"
 #   . "$(brew --prefix nvm)/nvm.sh"
 
 eval "$(pyenv init -)"
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
