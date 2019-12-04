@@ -203,21 +203,24 @@
   :init
   (setq magit-last-seen-setup-instructions "1.4.0")
   :config
+  (use-package magit-popup
+    :ensure t)
+  ;; (use-package transient)
+  (setq transient-enable-popup-navigation t)
   (use-package evil-magit
     :ensure t
     :config
     (add-hook 'magit-mode-hook 'evil-local-mode)
     (add-hook 'git-rebase-mode-hook 'evil-local-mode)
     (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
-        (let ((mm-key ","))
-          (dolist (state '(normal motion))
-            (evil-define-key state with-editor-mode-map
-              (concat mm-key mm-key) 'with-editor-finish
-              (concat mm-key "a")    'with-editor-cancel
-              (concat mm-key "c")    'with-editor-finish
-	      (concat mm-key "k") 'with-editor-cancel))))
-  (use-package magit-popup
-    :ensure t))
+    (let ((mm-key ","))
+      (dolist (state '(normal motion))
+	(evil-define-key state with-editor-mode-map
+	  (concat mm-key mm-key) 'with-editor-finish
+	  (concat mm-key "a")    'with-editor-cancel
+	  (concat mm-key "c")    'with-editor-finish
+	  (concat mm-key "k") 'with-editor-cancel))))
+  )
 
 ;; insert closing parens automatically
 (use-package smartparens
@@ -261,14 +264,6 @@
   (progn
     (add-hook 'js2-mode-hook 'prettier-js-mode)))
 
-(use-package tramp
-  :defer t
-  :config
-  (progn
-    (with-eval-after-load 'tramp-cache
-      (setq tramp-persistency-file-name "~/.emacs.d/etc/tramp"))
-    ))
-
 (use-package company
   :ensure t
   :defer t
@@ -290,12 +285,17 @@
   :config
   (simpleclip-mode 1))
 
+;; lorem ipsum insert in copy
 (use-package lorem-ipsum
   :ensure t
   :config
   (progn
-    (setq-default lorem-ipsum-use-default-bindings))
-  )
+    (setq-default lorem-ipsum-use-default-bindings)))
+
+;; R mode
+(use-package ess
+  :ensure t
+  :init (require 'ess-site))
 
 (defun bs/load-init ()
   "Reloads init file"
@@ -408,7 +408,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
