@@ -94,3 +94,5 @@ export NVM_DIR="/home/b/.nvm"
 
 eval "$(pyenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+
+export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/QGIS.app/Contents/Resources/python:/usr/local/opt/osgeo-gdal-python/lib/python3.7/site-packages:$PYTHONPATH
