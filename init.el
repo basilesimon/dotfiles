@@ -417,6 +417,6 @@
  '(org-level-1 ((t (:foreground "#cb4b16" :height 1.1 :family "Input"))))
  '(org-level-2 ((t (:foreground "#859900" :height 1.1 :family "Input"))))
  '(org-level-3 ((t (:foreground "#268bd2" :height 1.1 :family "Input"))))
- '(org-level-4 ((t (:foreground "#6c71c4" :height 1.1 :family "Input"))))
+ '(org-level-4 ((t (:foreground "#268bd2" :height 1.1 :family "Input"))))
  '(show-paren-match ((t (:background "gold"))))
  '(show-paren-mismatch ((((class color)) (:background "red" :foreground "white")))))
