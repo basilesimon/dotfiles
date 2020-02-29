@@ -51,6 +51,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # plugins=(git github sublime)
 source $ZSH/oh-my-zsh.sh
 source ~/.aliases
+source ~/.profile
 
 # User configuration
 

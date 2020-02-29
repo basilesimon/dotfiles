@@ -4,7 +4,7 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 
-(add-to-list 'default-frame-alist '(font . "Input-13"))
+(add-to-list 'default-frame-alist '(font . "Input"))
 (add-to-list 'default-frame-alist '(height . 100))
 (add-to-list 'default-frame-alist '(width . 80))
 
@@ -20,13 +20,14 @@
 
 ;; Bootstrap `use-package`
 (unless (package-installed-p 'use-package)
+    (package-initialize)
     (package-refresh-contents)
     (package-install 'use-package))
 (require 'use-package)
 
 ;; fix GUI lost with package paths
-(when (memq window-system '(mac ns x))
- (exec-path-from-shell-initialize))
+;;(when (memq window-system '(mac ns x))
+;; (exec-path-from-shell-initialize))
 
 ;; Vim mode
 ;; first line is witchcraft
