@@ -86,11 +86,12 @@ export LANG=en_US.UTF-8
 # Disable completion
 # zstyle ':completion:*' hosts off
 
-export NVM_DIR="/home/b/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 # export NVM_DIR="$HOME/.nvm"
-#   . "$(brew --prefix nvm)/nvm.sh"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 eval "$(pyenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
