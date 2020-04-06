@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Svelte component
+# key: sveltecomponent
+# --
+
+// JS
+<script>
+</script>
+
+// Styles
+<style>
+</style>
+
+<p>
+  I'm a new component
+</p>
