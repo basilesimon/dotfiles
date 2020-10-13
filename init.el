@@ -15,7 +15,7 @@
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
                          ("gnu"   . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+                         ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 ;; Bootstrap `use-package`
@@ -265,6 +265,10 @@
   (progn
     (add-hook 'js2-mode-hook 'prettier-js-mode)))
 
+(use-package web-mode
+  :ensure t
+  :mode (("\\.svelte$" . web-mode)))
+
 (use-package company
   :ensure t
   :defer t
@@ -294,9 +298,9 @@
     (setq-default lorem-ipsum-use-default-bindings)))
 
 ;; R mode
-(use-package ess
-  :ensure t
-  :init (require 'ess-site))
+;; (use-package ess
+;;   :ensure t
+;;   :init (require 'ess-site))
 
 (defun bs/load-init ()
   "Reloads init file"
@@ -409,7 +413,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+    (web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

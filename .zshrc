@@ -45,6 +45,8 @@ HIST_STAMPS="dd.mm.yyyy"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+ZSH_DISABLE_COMPFIX="true"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -87,11 +89,12 @@ export LANG=en_US.UTF-8
 # Disable completion
 # zstyle ':completion:*' hosts off
 
-export NVM_DIR="/home/b/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 # export NVM_DIR="$HOME/.nvm"
-#   . "$(brew --prefix nvm)/nvm.sh"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 eval "$(pyenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
