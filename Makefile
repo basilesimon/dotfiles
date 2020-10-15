@@ -56,9 +56,9 @@ linkDotfiles:
 
 nodeMac:
 	brew install nvm yarn
-	nvm install 8
-	nvm use 8
-	yarn install -g prettier csvtojson
+	nvm install 10 
+	nvm use 10
+	yarn global add prettier csvtojson
 
 nodeLinux:
     	wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
