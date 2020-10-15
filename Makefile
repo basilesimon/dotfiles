@@ -100,6 +100,10 @@ slateMac:
 	cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
 	echo "logout of the session and start Slate"
 
+rMac:
+	brew cask install r
+	brew cask install rstudio
+
 gitMac:
 	brew install git
 	git config --global user.name "Basile Simon"
@@ -120,4 +124,4 @@ dockerLinux:
 
 
 linuxinstall: zshLinux gitLinux linkZSH emacsLinux linkEmacs regolith linkDotfiles
-macinstall: homebrew gitMac zshMac linkDotfiles nodeMac pythonMac rubyMac slateMac
+macinstall: homebrew gitMac zshMac linkDotfiles nodeMac pythonMac rubyMac slateMac rMac
