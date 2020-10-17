@@ -150,7 +150,7 @@
 	  '((sequence "TODO" "DONE")))
     (setq org-todo-keyword-faces
           '(("TODO" . "#dc322f") ("DONE" . "#859900")))
-    (setq org-agenda-files (list "~/org/org.org" "~/org/fwd.org"))
+    (setq org-agenda-files (list "~/org/org.org"))
     (setq org-capture-templates
 	  '(("t" "todo" entry (file+headline "~/org/org.org" "todo")
              "* TODO %?\n  %i\n")
@@ -408,6 +408,7 @@
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(line-number-mode nil)
+ '(org-agenda-files (quote ("~/org/org.org")))
  '(org-babel-load-languages (quote ((emacs-lisp . t) (R . t))))
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
