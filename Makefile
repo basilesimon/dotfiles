@@ -110,5 +110,14 @@ gitLinux:
 	git config --global user.name "Basile Simon"
 	git config --global user.email "basile@basilesimon.fr"
 
+dockerLinux:
+	sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+	cat "deb [arch=amd64 trusted=yes] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
+	sudo apt-get update
+	sudo apt-get install docker-ce docker-ce-cli containerd.io
+	sudo usermod -aG docker ${USER}
+	su - ${USER}
+
+
 linuxinstall: zshLinux gitLinux linkZSH emacsLinux linkEmacs regolith linkDotfiles
 macinstall: homebrew gitMac zshMac linkDotfiles nodeMac pythonMac rubyMac slateMac
