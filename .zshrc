@@ -89,14 +89,14 @@ export LANG=en_US.UTF-8
 # Disable completion
 # zstyle ':completion:*' hosts off
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-source $(brew --prefix nvm)/nvm.sh
-export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
+if [ "$(uname 2> /dev/null)" != "Linux" ]; then
+    source $(brew --prefix nvm)/nvm.sh
+    export NVM_DIR="$HOME/.nvm"
+    . "$(brew --prefix nvm)/nvm.sh"
+fi
 
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/QGIS.app/Contents/Resources/python:/usr/local/opt/osgeo-gdal-python/lib/python3.7/site-packages:$PYTHONPATH
 export PATH=/usr/local/opt/ruby/bin:$PATH
