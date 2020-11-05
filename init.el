@@ -315,6 +315,12 @@
     (display-buffer buffer )
     (other-window 1)))
 
+(defun bs/truncate-and-wrap ()
+  "Toggles both line truncating and word wrapping"
+  (interactive)
+  (toggle-truncate-lines)
+  (toggle-word-wrap))
+
 ;; Custom keybinding
 (use-package general
   :ensure t
@@ -365,7 +371,7 @@
   "gm" '(magit-dispatch-popup :which-key "git status")
   "t"  '(:which-key "toggles")
   "tt"  '(counsel-load-theme :which-key "change theme")
-  "tr" '(toggle-truncate-lines :which-key "toggle truncate")
+  "tr" '(bs/truncate-and-wrap :toggle-truncate-lines :which-key "toggle truncate")
   "tl" '(nlinum-mode :which-key "toggle line numbering")
   "pp" '(prettier-js :which-key "prettier run")
   "lp" '(lorem-ipsum-insert-paragraphs :which-key "insert lipsum paras")
