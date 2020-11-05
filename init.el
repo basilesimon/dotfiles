@@ -321,6 +321,11 @@
   (toggle-truncate-lines)
   (toggle-word-wrap))
 
+(defun bs/find-personal-org ()
+  "Loads default org file"
+  (interactive)
+  (load-file "~/org/org.org"))
+
 ;; Custom keybinding
 (use-package general
   :ensure t
@@ -336,6 +341,7 @@
   "fe"  '(:which-key "init files")
   "fed" '((lambda () (interactive) (counsel-find-file "~/dotfiles/init.el")) :which-key "edit init")
   "feR" '(bs/load-init :which-key "reload init")
+  "feo" '(bs/find-personal-org :which-key "open org.org")
   ;; Buffers
   "b"   '(:which-key "buffers")
   "bb"  '(ivy-switch-buffer :which-key "buffers list")
