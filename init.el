@@ -302,10 +302,10 @@
 ;;   :ensure t
 ;;   :init (require 'ess-site))
 
-(defun bs/load-init ()
+(defun bs/reload-init ()
   "Reloads init file"
   (interactive)
-  (load-file "~/.emacs.d/init.el"))
+  (counsel-find-file "~/.emacs.d/init.el"))
 
 (defun bs/new-buffer ()
   "Creates new empty buffer"
@@ -324,7 +324,11 @@
 (defun bs/find-personal-org ()
   "Loads default org file"
   (interactive)
-  (load-file "~/org/org.org"))
+  (counsel-find-file "~/org/org.org"))
+
+(defun bs/find-init ()
+  (interactive)
+  (counsel-find-file "~/dotfiles/init.el"))
 
 ;; Custom keybinding
 (use-package general
@@ -339,8 +343,8 @@
   "ff"  '(counsel-find-file :which-key "find files")
   "ft"  '(neotree-toggle :which-key "neotree")
   "fe"  '(:which-key "init files")
-  "fed" '((lambda () (interactive) (counsel-find-file "~/dotfiles/init.el")) :which-key "edit init")
-  "feR" '(bs/load-init :which-key "reload init")
+  "fed" '(bs/find-init :which-key "edit init")
+  "feR" '(bs/reload-init :which-key "reload init")
   "feo" '(bs/find-personal-org :which-key "open org.org")
   ;; Buffers
   "b"   '(:which-key "buffers")
