@@ -102,3 +102,4 @@ export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osge
 export PATH=/usr/local/opt/ruby/bin:$PATH
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
+export NODE_PATH=`which node`
