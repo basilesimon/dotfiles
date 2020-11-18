@@ -246,28 +246,34 @@
       '("~/.emacs.d/private/snippets"))
   (yas-global-mode 1))
 
-(use-package prettier-js
-  :ensure t
+(use-package rjsx-mode
+  :mode ("\\.js\\'"
+         "\\.jsx\\'")
   :config
+  (setq js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil
+        js2-basic-offset 2
+        js-indent-level 2)
+  (setq-local flycheck-disabled-checkers (cl-union flycheck-disabled-checkers
+                                                   '(javascript-jshint))) ; jshint doesn't work for JSX
+  (electric-pair-mode 1))
+
+(use-package add-node-modules-path
+  :defer t
+  :hook (((js2-mode rjsx-mode) . add-node-modules-path)))
+
+(use-package prettier-js
+  :defer t
+  :diminish prettier-js-mode
   (progn
-  ;; Set JS Prettier plugin
   (setq prettier-js-args '(
                            "--trailing-comma" "es5"
                            "--bracket-spacing" "true"
                            "--single-quote" "true"
-			   ))))
+			   )))
+  :hook (((js2-mode rjsx-mode) . prettier-js-mode)))
 
-(use-package js2-mode
-  :ensure t
-  :interpreter (("node" . js2-mode))
-  :mode (("\\.js$" . js2-mode))
-  :config
-  (progn
-    (add-hook 'js2-mode-hook 'prettier-js-mode)))
-
-(use-package web-mode
-  :ensure t
-  :mode (("\\.svelte$" . web-mode)))
+(add-to-list 'exec-path "${HOME}/.nvm/versions/node/v10.22.1/bin")
 
 (use-package company
   :ensure t
@@ -302,10 +308,18 @@
 ;;   :ensure t
 ;;   :init (require 'ess-site))
 
+;; Olivetti writing environment
+(use-package olivetti
+  :ensure olivetti
+  :config
+  (progn
+    (setf olivetti-body-width 80)
+    (visual-line-mode)))
+
 (defun bs/reload-init ()
   "Reloads init file"
   (interactive)
-  (counsel-find-file "~/.emacs.d/init.el"))
+  (load-file "~/.emacs.d/init.el"))
 
 (defun bs/new-buffer ()
   "Creates new empty buffer"
@@ -337,7 +351,6 @@
   :states '(normal visual insert emacs)
   :prefix "SPC"
   :non-normal-prefix "M-SPC"
-  ;; "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
   "SPC" '(counsel-M-x :which-key "M-x")
   "f"   '(:which-key "files")
   "ff"  '(counsel-find-file :which-key "find files")
@@ -382,12 +395,11 @@
   "t"  '(:which-key "toggles")
   "tt"  '(counsel-load-theme :which-key "change theme")
   "tr" '(bs/truncate-and-wrap :toggle-truncate-lines :which-key "toggle truncate")
+  "to" '(olivetti-mode :which-key"toggle olivetti")
   "tl" '(nlinum-mode :which-key "toggle line numbering")
-  "pp" '(prettier-js :which-key "prettier run")
   "lp" '(lorem-ipsum-insert-paragraphs :which-key "insert lipsum paras")
   "ls" '(lorem-ipsum-insert-sentences :which-key "insert lipsum sentences")
 ))
-
 
 ;; Show matching parens
 (setq show-paren-delay 0)
@@ -421,16 +433,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+   '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
  '(line-number-mode nil)
- '(org-agenda-files (quote ("~/org/org.org")))
- '(org-babel-load-languages (quote ((emacs-lisp . t) (R . t))))
+ '(org-agenda-files '("~/org/org.org"))
+ '(org-babel-load-languages '((emacs-lisp . t) (R . t)))
  '(org-confirm-babel-evaluate nil)
- '(org-export-backends (quote (ascii html icalendar latex md odt)))
+ '(org-export-backends '(ascii html icalendar latex md odt))
+ '(package-archives
+   '(("org" . "http://orgmode.org/elpa/")
+     ("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa" . "http://melpa.org/packages/")
+     ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   (quote
-    (web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))))
+   '(rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
