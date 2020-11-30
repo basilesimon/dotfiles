@@ -150,7 +150,7 @@
 	  '((sequence "TODO" "DONE")))
     (setq org-todo-keyword-faces
           '(("TODO" . "#dc322f") ("DONE" . "#859900")))
-    (setq org-agenda-files (list "~/org/org.org"))
+    (setq org-agenda-files "~/org")
     (setq org-capture-templates
 	  '(("t" "todo" entry (file+headline "~/org/org.org" "todo")
              "* TODO %?\n  %i\n")
@@ -248,14 +248,13 @@
 
 (use-package rjsx-mode
   :mode ("\\.js\\'"
-         "\\.jsx\\'")
+         "\\.jsx\\'"
+	 "\\.tsx\\'")
   :config
   (setq js2-mode-show-parse-errors nil
         js2-mode-show-strict-warnings nil
         js2-basic-offset 2
         js-indent-level 2)
-  (setq-local flycheck-disabled-checkers (cl-union flycheck-disabled-checkers
-                                                   '(javascript-jshint))) ; jshint doesn't work for JSX
   (electric-pair-mode 1))
 
 (use-package add-node-modules-path
@@ -263,15 +262,14 @@
   :hook (((js2-mode rjsx-mode) . add-node-modules-path)))
 
 (use-package prettier-js
-  :defer t
-  :diminish prettier-js-mode
-  (progn
-  (setq prettier-js-args '(
-                           "--trailing-comma" "es5"
-                           "--bracket-spacing" "true"
-                           "--single-quote" "true"
-			   )))
-  :hook (((js2-mode rjsx-mode) . prettier-js-mode)))
+  :config
+    (setq prettier-js-args '(
+                             "--trailing-comma" "es5"
+                             "--bracket-spacing" "true"
+                             "--single-quote" "true"
+			     ))
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'rjsx-mode-hook 'prettier-js-mode))
 
 (add-to-list 'exec-path "${HOME}/.nvm/versions/node/v10.22.1/bin")
 
@@ -435,7 +433,7 @@
  '(custom-safe-themes
    '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
  '(line-number-mode nil)
- '(org-agenda-files '("~/org/org.org"))
+ '(org-agenda-files '("~/org"))
  '(org-babel-load-languages '((emacs-lisp . t) (R . t)))
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends '(ascii html icalendar latex md odt))
