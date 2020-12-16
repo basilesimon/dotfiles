@@ -158,6 +158,14 @@
              "* TODO %?\n  %i\n")
 	    ))))
 
+(use-package org-bullets
+  :ensure t
+  :init
+  (setq org-bullets-bullet-list
+	'("◉" "◎" ">" "○" "►" "◇"))
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
 ;; solarized
 (use-package solarized-theme
   :ensure t
@@ -443,7 +451,7 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons)))
+   '(org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
