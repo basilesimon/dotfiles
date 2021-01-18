@@ -89,12 +89,38 @@ export LANG=en_US.UTF-8
 # zstyle ':completion:*' hosts off
 
 
-if [ "$(uname 2> /dev/null)" != "Linux" ]; then
-    source $(brew --prefix nvm)/nvm.sh
-    export NVM_DIR="$HOME/.nvm"
-    . "$(brew --prefix nvm)/nvm.sh"
-    eval "$(rbenv init -)"
-fi
+# if [ "$(uname 2> /dev/null)" != "Linux" ]; then
+#     source $(brew --prefix nvm)/nvm.sh
+#     export NVM_DIR="$HOME/.nvm"
+#     . "$(brew --prefix nvm)/nvm.sh"
+#     eval "$(rbenv init -)"
+# fi
+
+# NVM slows down zsh startup A LOT
+# so we lazy load it and still make global binaries available
+# https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs/?context=3
+# https://medium.com/@dannysmith/little-thing-2-speeding-up-zsh-f1860390f92
+declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+
+NODE_GLOBALS+=("node")
+NODE_GLOBALS+=("nvm")
+
+load_nvm () {
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+}
+
+for cmd in "${NODE_GLOBALS[@]}"; do
+    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
+done
+
+
+# compinit/zcompdump once a day
+# autoload -Uz compinit
+# for dump in ~/.zcompdump(N.mh+24); do
+#     compinit
+# done
+# compinit -C
 
 
 eval "$(pyenv init -)"
