@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: styledDiv
-# key: styled
-# --
-export const $1 = styled.div\`
-       $2
-\`;

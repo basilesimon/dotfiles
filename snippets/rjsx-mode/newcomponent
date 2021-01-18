@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: React functional component
+# key: newcomponent
+# --
+
+import * as React from 'react';
+
+export const $1 = () => (
+<div>
+$1 yo yo 
+</div>
+)

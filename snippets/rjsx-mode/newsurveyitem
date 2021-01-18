@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: new survey item
+# key: surveyitem
+# --
+{
+type: $1,
+name: $2,
+title: $3,
+choices: []
+},
