@@ -71,7 +71,6 @@
   :config
   (global-evil-mc-mode  1))
 
-
 ;; Which Key
 (use-package which-key
   :ensure t
@@ -126,6 +125,7 @@
 ;; org-mode exports to reaveal presentations
 (use-package ox-reveal
   :ensure ox-reveal)
+
 (use-package htmlize
   :ensure t)
 
@@ -173,7 +173,7 @@
   (progn
     (setq solarized-use-less-bold t
 	  solarized-emphasize-indicators nil)
-    (load-theme 'solarized-dark t)))
+    (load-theme 'solarized-light t)))
 
 ;; Spaceline - A mode line
 (use-package spaceline
@@ -181,12 +181,15 @@
   :init
   (require 'spaceline-config)
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-  (setq powerline-default-separator 'arrow-fade)
+  (setq powerline-default-separator 'wave)
   (setq ns-use-srgb-colorspace nil)
-  (setq powerline-default-separator 'utf-8)
+; (setq powerline-default-separator 'utf-8)
+  (setq powerline-raw " ")
+  ; (setq powerline-height 20)
+  (setq powerline-text-scale-factor 0.9)
   :config
   (progn
-    (spaceline-spacemacs-theme)
+    (spaceline-emacs-theme)
     (spaceline-toggle-minor-modes-off)
     (spaceline-toggle-hud-off)
     (spaceline-toggle-version-control-on)
@@ -451,7 +454,8 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons)))
+   '(spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+ '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
