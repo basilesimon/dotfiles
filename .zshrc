@@ -100,18 +100,20 @@ export LANG=en_US.UTF-8
 # so we lazy load it and still make global binaries available
 # https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs/?context=3
 # https://medium.com/@dannysmith/little-thing-2-speeding-up-zsh-f1860390f92
-declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
-
+# Add every binary that requires nvm, npm or node to run to an array of node globals
+NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
 NODE_GLOBALS+=("node")
 NODE_GLOBALS+=("nvm")
 
+# Lazy-loading nvm + npm on node globals call
 load_nvm () {
-    export NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  export NVM_DIR=~/.nvm
+  [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
 }
 
+# Making node global trigger the lazy loading
 for cmd in "${NODE_GLOBALS[@]}"; do
-    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
+  eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
 done
 
 
