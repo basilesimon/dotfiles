@@ -325,6 +325,13 @@
     (setf olivetti-body-width 80)
     (visual-line-mode)))
 
+(use-package yaml-mode
+  :config
+  (add-hook 'yaml-mode-hook
+          (lambda ()
+            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  )
+
 (defun bs/reload-init ()
   "Reloads init file"
   (interactive)
@@ -454,7 +461,7 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
