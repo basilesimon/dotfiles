@@ -72,19 +72,9 @@ pythonMac:
 	pyenv install 3.7.2
 	pyenv global 3.7.2
 
-regolith:
-	mkdir -p ${HOME}/.config/regolith/i3
-	ln -f -s ${HOME}/dotfiles/i3/regolith_root_style ${HOME}/.Xresources-regolith
-	ln -f -s ${HOME}/dotfiles/i3/i3xrocks ${HOME}/.Xresources-i3xrocks
-	ln -f -s ${HOME}/dotfiles/i3/config ${HOME}/.config/regolith/i3/config
-	ln -f -s ${HOME}/dotfiles/i3/typeface-input ${HOME}/.config/regolith/typeface-input
-
 linuxclean:
 	rm -r ${HOME}/.emacs.d/
 	rm -r ${HOME}/colorschemes/
-	rm -r ${HOME}/.config/regolith
-	rm ${HOME}/.Xresources-regolith
-	rm ${HOME}/.Xresources-i3xrocks
 	rm ${HOME}/.tmux.conf
 	rm ${HOME}/.profile
 	rm ${HOME}/.zshrc
@@ -123,5 +113,5 @@ dockerLinux:
 	su - ${USER}
 
 
-linuxinstall: zshLinux gitLinux linkZSH emacsLinux linkEmacs regolith linkDotfiles
+linuxinstall: zshLinux gitLinux linkZSH emacsLinux linkEmacs linkDotfiles dockerLinux
 macinstall: homebrew gitMac zshMac linkDotfiles nodeMac pythonMac rubyMac slateMac rMac
