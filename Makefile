@@ -9,8 +9,13 @@ linkZSH:
 	ln -f -s ${HOME}/dotfiles/colorschemes/solarized.py ${HOME}/colorschemes/solarized.py
 	ln -f -s ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 	ln -f -s ${HOME}/dotfiles/.terminfo-24bit.src ${HOME}/.terminfo-24bit.src
-	ln -f -s ${HOME}/dotfiles/.tmux.conf ${HOME}/.tmux.conf
 	echo "source ${HOME}/.zshrc"
+
+tmux:
+	mkdir ${HOME}/.tmux
+	mkdir ${HOME}/.tmux/plugins
+	git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+	ln -f -s ${HOME}/dotfiles/.tmux.conf ${HOME}/.tmux.conf
 
 zshLinux:
 	sudo apt-get install zsh wget tmux htop
@@ -35,7 +40,6 @@ zshMac:
 	rm ${HOME}/.zshrc
 	ln -f -s ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 	ln -f -s ${HOME}/dotfiles/.terminfo-24bit.src ${HOME}/.terminfo-24bit.src
-	ln -f -s ${HOME}/dotfiles/.tmux.conf ${HOME}/.tmux.conf
 	source ${HOME}/.zshrc
 	tic -x -o ~/.terminfo ~/dotfiles/terminfo-24bit.src
 
@@ -113,5 +117,5 @@ dockerLinux:
 	su - ${USER}
 
 
-linuxinstall: zshLinux gitLinux linkZSH emacsLinux linkEmacs linkDotfiles dockerLinux
-macinstall: homebrew gitMac zshMac linkDotfiles nodeMac pythonMac rubyMac slateMac rMac
+linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux
+macinstall: homebrew gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac
