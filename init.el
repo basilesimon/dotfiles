@@ -4,7 +4,7 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 
-(add-to-list 'default-frame-alist '(font . "Input"))
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono"))
 (add-to-list 'default-frame-alist '(height . 100))
 (add-to-list 'default-frame-alist '(width . 80))
 
@@ -461,16 +461,16 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-level-1 ((t (:foreground "#cb4b16" :height 1.1 :family "Input"))))
- '(org-level-2 ((t (:foreground "#859900" :height 1.1 :family "Input"))))
- '(org-level-3 ((t (:foreground "#268bd2" :height 1.1 :family "Input"))))
- '(org-level-4 ((t (:foreground "#268bd2" :height 1.1 :family "Input"))))
+ '(org-level-1 ((t (:foreground "#cb4b16"  :family "Ubuntu Mono"))))
+ '(org-level-2 ((t (:foreground "#859900"  :family "Ubuntu Mono"))))
+ '(org-level-3 ((t (:foreground "#268bd2"  :family "Ubuntu Mono"))))
+ '(org-level-4 ((t (:foreground "#268bd2"  :family "Ubuntu Mono"))))
  '(show-paren-match ((t (:background "gold"))))
  '(show-paren-mismatch ((((class color)) (:background "red" :foreground "white")))))

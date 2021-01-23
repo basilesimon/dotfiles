@@ -3,12 +3,13 @@ homebrew:
 	brew update --force && brew upgrade
 
 linkZSH:
-	chsh -s /bin/zsh
+	chsh -s /usr/bin/zsh
 	sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-	mkdir ${HOME}/colorschemes/
-	ln -f -s ${HOME}/dotfiles/colorschemes/solarized.py ${HOME}/colorschemes/solarized.py
+	sudo apt-get install dconf-cli
+	cd mate-terminal-colors-solarized
+	./install.sh
+	cd ../
 	ln -f -s ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
-	ln -f -s ${HOME}/dotfiles/.terminfo-24bit.src ${HOME}/.terminfo-24bit.src
 	echo "source ${HOME}/.zshrc"
 
 tmux:
@@ -18,7 +19,7 @@ tmux:
 	ln -f -s ${HOME}/dotfiles/.tmux.conf ${HOME}/.tmux.conf
 
 zshLinux:
-	sudo apt-get install zsh wget tmux htop
+	sudo apt-get install zsh wget tmux htop curl
 
 linkEmacs:
 	mkdir ${HOME}/.emacs.d/
@@ -27,8 +28,15 @@ linkEmacs:
 	ln -f -s ${HOME}/dotfiles/snippets ${HOME}/.emacs.d/private/snippets
 
 emacsLinux:
-	sudo add-apt-repository ppa:kelleyk/emacs
-	sudo apt-get install emacs26
+	sudo echo "deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu focal main" >> /etc/apt/sources.list
+	sudo echo "deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu focal main/debug" >> /etc/apt/sources.list
+	sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net:80 --recv-keys 0x873503A090750CDAEB0754D93FF0E01EEAAFC9
+	sudo apt-get update
+	sudo apt-get install emacs27
+	mkdir ${HOME}/.emacs.d/
+	mkdir ${HOME}/.emacs.d/private
+	ln -f -s ${HOME}/dotfiles/init.el ${HOME}/.emacs.d/init.el
+	ln -f -s ${HOME}/dotfiles/snippets ${HOME}/.emacs.d/private/snippets
 
 zshMac:
 	brew install zsh wget tmux
@@ -65,9 +73,10 @@ nodeMac:
 	yarn global add prettier csvtojson
 
 nodeLinux:
-    	wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-	nvm install 8
-	nvm use 8
+    	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+	nvm install 10
+	nvm use 10
+	sudo apt remove yarn
 	sudo apt-get install yarn
 	yarn global add prettier
 
@@ -110,11 +119,18 @@ gitLinux:
 
 dockerLinux:
 	sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-	cat "deb [arch=amd64 trusted=yes] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
+	sudo cat "deb [arch=amd64 trusted=yes] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
 	sudo apt-get update
 	sudo apt-get install docker-ce docker-ce-cli containerd.io
 	sudo usermod -aG docker ${USER}
 	su - ${USER}
+
+albert:
+	curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
+	echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/home:manuelschneid3r.list
+	sudo wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_20.04/Release.key -O "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc"
+	sudo apt update
+	sudo apt install albert
 
 
 linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux
