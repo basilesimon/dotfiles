@@ -132,6 +132,8 @@ albert:
 	sudo apt update
 	sudo apt install albert
 
+dockerMac:
+	brew install --cask docker
 
 linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux
-macinstall: homebrew gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac
+macinstall: homebrew gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
