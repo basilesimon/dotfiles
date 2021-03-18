@@ -151,7 +151,7 @@
 	  '((sequence "TODO" "DONE")))
     (setq org-todo-keyword-faces
           '(("TODO" . "#dc322f") ("DONE" . "#859900")))
-    (setq org-agenda-files "~/org")
+    (setq org-agenda-files (list org-directory))
     (setq org-capture-templates
 	  '(("t" "todo" entry (file+headline "~/org/org.org" "todo")
              "* TODO %?\n  %i\n")
@@ -461,18 +461,26 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
+ '(default-input-method "latin-postfix")
  '(line-number-mode nil)
- '(org-agenda-files '("~/org"))
+ '(org-agenda-files
+   '("/Users/silverie/org/archive.org" "/Users/silverie/org/gafam-tactech.org" "/Users/silverie/org/guide.org" "/Users/silverie/org/gw-sys.org" "/Users/silverie/org/org.org" "/Users/silverie/org/prototype.org" "/Users/silverie/org/radartech.org" "/Users/silverie/org/weeknotes.org" "/Users/silverie/org/dw-reco.org"))
  '(org-babel-load-languages '((emacs-lisp . t) (R . t)))
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends '(ascii html icalendar latex md odt))
+ '(org-journal-date-format "%A, %d %B %Y")
+ '(org-journal-date-prefix "#+TITLE: ")
+ '(org-journal-dir "~/org/")
+ '(org-journal-file-format "%Y-%m-%d.org")
+ '(org-roam-completion-system 'ivy)
+ '(org-roam-directory "~/SynologyDrive/_notes")
  '(package-archives
    '(("org" . "http://orgmode.org/elpa/")
      ("gnu" . "http://elpa.gnu.org/packages/")
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(org-journal org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
