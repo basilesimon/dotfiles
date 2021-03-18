@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: blog-head
+# key: blog-head
+# --
+
+---
+layout: post
+title: ""
+description: ""
+image: ""
+tags: ""
+---
