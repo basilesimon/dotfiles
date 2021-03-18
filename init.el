@@ -167,6 +167,31 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+;; roam
+(use-package org-roam
+  :ensure t
+  :hook
+      (after-init . org-roam-mode)
+  :config
+  (progn
+    (setq org-roam-capture-templates
+	'(("d" "default" plain (function org-roam--capture-get-point)
+	   "%?"
+	   :file-name "${slug}-%<%Y%m>"
+	   :head "#+title: ${title}\n"
+	   :unnarrowed t))))
+  :custom
+  (org-roam-directory "~/SynologyDrive/_notes")
+  (org-roam-completion-system 'ivy))
+
+(use-package org-journal
+      :custom
+      (org-journal-dir "~/org/")
+      (org-journal-date-prefix "#+TITLE: ")
+      (org-journal-file-format "%Y-%m-%d.org")
+      (org-journal-date-format "%A, %d %B %Y"))
+    (setq org-journal-enable-agenda-integration t)
+
 ;; solarized
 (use-package solarized-theme
   :ensure t
@@ -300,6 +325,8 @@
     (setq company-dabbrev-downcase nil)
     (setq-default company-tooltip-minimum-width 15)
     (setq-default company-idle-delay 0.1))
+  (add-hook 'after-init-hook 'global-company-mode)
+  (add-to-list 'company-backends 'company-capf)
   :diminish company-mode)
 
 (use-package simpleclip :ensure t
@@ -409,6 +436,11 @@
   "mN" '(widen :which-key "org widen")
   "mc" '(counsel-org-capture :which-key "org capture")
   "ms" '(org-schedule :which-key "org schedule")
+  ;; Roam
+  "mr"  '(:which-key "ROAM")
+  "mri" '(org-roam-find-file :which-key "find file")
+  "mrn" '(org-journal-new-entry :which-key "new journal")
+  "mrt" '(org-roam-buffer-toggle-display :which-key "toggle sidebar")
   ;; cursors
   "c"  '(:which-key "cursors")
   "cu"  '(evil-mc-undo-all-cursors :which-key "undo all")
