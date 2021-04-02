@@ -25,16 +25,15 @@
     (package-install 'use-package))
 (require 'use-package)
 
-;; fix GUI lost with package paths
-;;(when (memq window-system '(mac ns x))
-;; (exec-path-from-shell-initialize))
-
 ;; Vim mode
 ;; first line is witchcraft
 ;; and fixes tab to expand in org mode
-(setq evil-want-C-i-jump nil)
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-i-jump nil)
   :config
   (setq evil-default-cursor t)
   (setq evil-insert-state-cursor '(box "white")
@@ -42,32 +41,28 @@
       evil-normal-state-cursor '(box "#97C150"))
   (evil-mode 1))
 
-;; relative line numbering
+;; line numbering
+;; absolute and enabled by default,
+;; also relative
 (use-package nlinum
-  :ensure t
-  :config (add-hook 'prog-mode-hook '(lambda ()
-				       (nlinum-mode t))))
+  :hook (prog-mode . nlinum-mode))
 
 (use-package nlinum-relative
   :config
   (nlinum-relative-setup-evil)
   (setq linum-relative-redisplay-delay 0)
-  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+  :hook (prog-mode . nlinum-relative-mode))
 
 ;; surround selection with 's'
 (use-package evil-surround
-  :ensure t
   :config
-  (progn
-      (global-evil-surround-mode 1)
-      ;; `s' for surround instead of `substitute'
-      ;; see motivation for this change in the documentation
-      (evil-define-key 'visual evil-surround-mode-map "s" 'evil-surround-region)
-      (evil-define-key 'visual evil-surround-mode-map "S" 'evil-substitute)))
+  (global-evil-surround-mode 1)
+  :init
+  (evil-define-key 'visual evil-surround-mode-map "s" 'evil-surround-region)
+  (evil-define-key 'visual evil-surround-mode-map "S" 'evil-substitute))
 
 ;; multiple cursors
 (use-package evil-mc
-  :ensure t
   :config
   (global-evil-mc-mode  1))
 
@@ -81,6 +76,10 @@
   :config
   (which-key-mode 1))
 
+;; rainbow delimters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 ;; ivy
 (use-package ivy
   :ensure t
@@ -90,8 +89,7 @@
   (setq ivy-use-virutal-bufferst t)
   (setq ivy-height 20)
   ;; a single ESC quits virtual buffers
-  (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
-  )
+  :bind (([escape] . minibuffer-keyboard-quit)))
 
 ;; counsel
 (use-package counsel
@@ -122,10 +120,6 @@
                 (define-key evil-normal-state-local-map (kbd "|") 'neotree-enter-vertical-split)
                 (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle))))
 
-;; org-mode exports to reaveal presentations
-(use-package ox-reveal
-  :ensure ox-reveal)
-
 (use-package htmlize
   :ensure t)
 
@@ -133,14 +127,13 @@
 (use-package diff-hl
   :init
   (global-diff-hl-mode)
-  :config
-  (add-hook 'vc-checkin-hook 'diff-hl-update))
+  :hook (vc-checkin . diff-hl-update))
 
 (use-package org
   :ensure t
   :mode ("\\.org\\'" . org-mode)
+  :hook (org-mode . olivetti-mode)
   :config
-  (add-hook 'org-mode-hook 'olivetti-mode)
   (progn
     (setq org-directory "~/org")
     (setq org-ellipsis " ⤵")
@@ -160,18 +153,16 @@
 	    ))))
 
 (use-package org-bullets
-  :ensure t
   :init
   (setq org-bullets-bullet-list
 	'("◉" "◎" ">" "○" "►" "◇"))
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :hook (org-mode . org-bullets-mode))
 
 ;; roam
 (use-package org-roam
   :ensure t
   :hook
-      (after-init . org-roam-mode)
+  (after-init . org-roam-mode)
   :config
   (progn
     (setq org-roam-capture-templates
@@ -190,16 +181,27 @@
       (org-journal-date-prefix "#+TITLE: ")
       (org-journal-file-format "%Y-%m-%d.org")
       (org-journal-date-format "%A, %d %B %Y"))
-    (setq org-journal-enable-agenda-integration t)
+(setq org-journal-enable-agenda-integration t)
 
 ;; solarized
-(use-package solarized-theme
-  :ensure t
-  :init
-  (progn
-    (setq solarized-use-less-bold t
-	  solarized-emphasize-indicators nil)
-    (load-theme 'solarized-light t)))
+;; (use-package solarized-theme
+;;   :init
+;;   (load-theme 'solarized-light t)
+;;   :config
+;;   (setq solarized-use-less-bold t)
+;;   (setq solarized-emphasize-indicators nil))
+
+(use-package solarized
+    :if window-system
+    :init
+    (setq-default frame-background-mode 'dark)
+    (set-frame-parameter nil 'background-mode 'dark)
+    (add-hook 'after-make-frame-functions (lambda (frame)
+                "Reenable solarized"
+                (enable-theme 'solarized-dark)))
+    :config
+    (load-theme 'solarized-dark t)
+    (enable-theme 'solarized-dark))
 
 ;; Spaceline - A mode line
 (use-package spaceline
@@ -229,11 +231,11 @@
   :config
   (setq highlight-indent-guides-method 'fill)
   (setq highlight-indent-guides-responsive nil)
+  (setq highlight-indent-guides-auto-enabled nil)
   (setq indent-guide-recursive t))
 
-;; Highlight the current line
+;; highlight the current line
 (use-package hl-line
-  :ensure nil
   :hook (after-init . global-hl-line-mode))
 
 (use-package magit
@@ -245,19 +247,19 @@
     :ensure t)
   ;; (use-package transient)
   (setq transient-enable-popup-navigation t)
-  (use-package evil-magit
-    :ensure t
-    :config
-    (add-hook 'magit-mode-hook 'evil-local-mode)
-    (add-hook 'git-rebase-mode-hook 'evil-local-mode)
-    (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
-    (let ((mm-key ","))
-      (dolist (state '(normal motion))
-	(evil-define-key state with-editor-mode-map
-	  (concat mm-key mm-key) 'with-editor-finish
-	  (concat mm-key "a")    'with-editor-cancel
-	  (concat mm-key "c")    'with-editor-finish
-	  (concat mm-key "k") 'with-editor-cancel))))
+  ;; (use-package evil-magit
+  ;;   :ensure t
+  ;;   :config
+  ;;   (add-hook 'magit-mode-hook 'evil-local-mode)
+  ;;   (add-hook 'git-rebase-mode-hook 'evil-local-mode)
+  ;;   (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
+  ;;   (let ((mm-key ","))
+  ;;     (dolist (state '(normal motion))
+  ;; 	(evil-define-key state with-editor-mode-map
+  ;; 	  (concat mm-key mm-key) 'with-editor-finish
+  ;; 	  (concat mm-key "a")    'with-editor-cancel
+  ;; 	  (concat mm-key "c")    'with-editor-finish
+  ;; 	  (concat mm-key "k") 'with-editor-cancel))))
   )
 
 ;; insert closing parens automatically
@@ -300,13 +302,14 @@
 
 (use-package prettier-js
   :config
-    (setq prettier-js-args '(
-                             "--trailing-comma" "es5"
-                             "--bracket-spacing" "true"
-                             "--single-quote" "true"
-			     ))
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'rjsx-mode-hook 'prettier-js-mode))
+  (setq prettier-js-args '(
+                           "--trailing-comma" "es5"
+                           "--bracket-spacing" "true"
+                           "--single-quote" "true"
+			   ))
+  :hook
+  (js2-mode . prettier-js-mode)
+  (rjsx-mode . prettier-js-mode))
 
 (add-to-list 'exec-path "${HOME}/.nvm/versions/node/v10.22.1/bin")
 
@@ -340,25 +343,18 @@
   (progn
     (setq-default lorem-ipsum-use-default-bindings)))
 
-;; R mode
-;; (use-package ess
-;;   :ensure t
-;;   :init (require 'ess-site))
-
 ;; Olivetti writing environment
 (use-package olivetti
   :ensure olivetti
   :config
-  (progn
-    (setf olivetti-body-width 80)
-    (visual-line-mode)))
+  (setq olivetti-body-width 80)
+  (setq olivetti-recall-visual-line-mode-entry-state t))
 
 (use-package yaml-mode
   :config
   (add-hook 'yaml-mode-hook
           (lambda ()
-            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-  )
+            (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
 (use-package clojure-mode
   :ensure t
@@ -368,6 +364,25 @@
   (add-hook 'clojure-mode-hook #'yas-minor-mode)
   (add-hook 'clojure-mode-hook #'linum-mode)
   (add-hook 'clojure-mode-hook #'smartparens-mode))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns))
+  :config
+  (setq exec-path-from-shell-arguments '("-l"))
+  (exec-path-from-shell-initialize))
+
+(defun bs/web-mode-hook ()
+    "Setup indentation when loading `web-mode`."
+    (setq web-mode-markup-indent-offset 2
+          web-mode-css-indent-offset 2
+          web-mode-code-indent-offset 2))
+
+(use-package web-mode
+  :hook
+  (web-mode . bs/web-mode-hook)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.svelte\\'" . web-mode)))
 
 (defun bs/reload-init ()
   "Reloads init file"
@@ -407,6 +422,7 @@
   "SPC" '(counsel-M-x :which-key "M-x")
   "f"   '(:which-key "files")
   "ff"  '(counsel-find-file :which-key "find files")
+  "fg"  '(counsel-ag :which-key "find str in project")
   "ft"  '(neotree-toggle :which-key "neotree")
   "fe"  '(:which-key "init files")
   "fed" '(bs/find-init :which-key "edit init")
@@ -452,7 +468,7 @@
   "gs" '(magit-status :which-key "git status")
   "gm" '(magit-dispatch-popup :which-key "git status")
   "t"  '(:which-key "toggles")
-  "tt"  '(counsel-load-theme :which-key "change theme")
+  "tt" '(counsel-load-theme :which-key "change theme")
   "tr" '(bs/truncate-and-wrap :toggle-truncate-lines :which-key "toggle truncate")
   "to" '(olivetti-mode :which-key"toggle olivetti")
   "tl" '(nlinum-mode :which-key "toggle line numbering")
@@ -491,13 +507,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
+ ;; '(custom-safe-themes
+ ;;   '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
  '(default-input-method "latin-postfix")
  '(line-number-mode nil)
  '(org-agenda-files
    '("/Users/silverie/org/archive.org" "/Users/silverie/org/gafam-tactech.org" "/Users/silverie/org/guide.org" "/Users/silverie/org/gw-sys.org" "/Users/silverie/org/org.org" "/Users/silverie/org/prototype.org" "/Users/silverie/org/radartech.org" "/Users/silverie/org/weeknotes.org" "/Users/silverie/org/dw-reco.org"))
- '(org-babel-load-languages '((emacs-lisp . t) (R . t)))
+ '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(org-journal-date-format "%A, %d %B %Y")
@@ -512,7 +528,7 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(org-journal org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(rainbow-delimiters clipetty org-journal org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
