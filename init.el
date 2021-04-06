@@ -135,6 +135,7 @@
   :hook (org-mode . olivetti-mode)
   :config
   (progn
+    (setq org-startup-folded t)
     (setq org-directory "~/org")
     (setq org-ellipsis " ⤵")
     (setq org-agenda-span 14)
@@ -184,24 +185,9 @@
 (setq org-journal-enable-agenda-integration t)
 
 ;; solarized
-;; (use-package solarized-theme
-;;   :init
-;;   (load-theme 'solarized-light t)
-;;   :config
-;;   (setq solarized-use-less-bold t)
-;;   (setq solarized-emphasize-indicators nil))
-
-(use-package solarized
-    :if window-system
-    :init
-    (setq-default frame-background-mode 'dark)
-    (set-frame-parameter nil 'background-mode 'dark)
-    (add-hook 'after-make-frame-functions (lambda (frame)
-                "Reenable solarized"
-                (enable-theme 'solarized-dark)))
-    :config
-    (load-theme 'solarized-dark t)
-    (enable-theme 'solarized-dark))
+(setq solarized-use-less-bold t)
+(setq solarized-emphasize-indicators nil)
+(load-theme 'solarized-light t)
 
 ;; Spaceline - A mode line
 (use-package spaceline
@@ -309,6 +295,7 @@
 			   ))
   :hook
   (js2-mode . prettier-js-mode)
+  (web-mode . prettier-js-mode)
   (rjsx-mode . prettier-js-mode))
 
 (add-to-list 'exec-path "${HOME}/.nvm/versions/node/v10.22.1/bin")
@@ -507,8 +494,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(custom-safe-themes
- ;;   '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
+ '(custom-safe-themes
+   '("c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" default))
  '(default-input-method "latin-postfix")
  '(line-number-mode nil)
  '(org-agenda-files
