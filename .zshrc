@@ -34,8 +34,8 @@ export LANG=en_US.UTF-8
 export EDITOR='vim'
 
 # Tmux scheme
-[[ $TMUX = "" ]] && export TERM="xterm-24bit"
-TERM="xterm-24bit"
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
+TERM="xterm-256color"
 
 # NVM slows down zsh startup A LOT
 # so we lazy load it and still make global binaries available

@@ -6,9 +6,9 @@ linkZSH:
 	chsh -s /usr/bin/zsh
 	sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 	sudo apt-get install dconf-cli
-	cd mate-terminal-colors-solarized
-	./install.sh
-	cd ../
+	# cd mate-terminal-colors-solarized
+	# ./install.sh
+	# cd ../
 	ln -f -s ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 	echo "source ${HOME}/.zshrc"
 
@@ -119,8 +119,10 @@ gitLinux:
 
 dockerLinux:
 	sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-	sudo cat "deb [arch=amd64 trusted=yes] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 	sudo apt-get update
+	apt-cache policy docker-ce
 	sudo apt-get install docker-ce docker-ce-cli containerd.io
 	sudo usermod -aG docker ${USER}
 	su - ${USER}
@@ -137,3 +139,4 @@ dockerMac:
 
 linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux
 macinstall: homebrew gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
+vps: zshLinux gitLinux linkZSH tmux linkDotfiles dockerLinux
