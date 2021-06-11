@@ -57,8 +57,10 @@ for cmd in "${NODE_GLOBALS[@]}"; do
   eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
 done
 
+export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
-export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:/usr/local/opt/imagemagick@6/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/silverie/gems/bin:"
+eval "$(pyenv init --path)"
+export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:/usr/local/opt/imagemagick@6/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/silverie/gems/bin:$PYENV_ROOT/bin:$PATH"
 export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/QGIS.app/Contents/Resources/python:/usr/local/opt/osgeo-gdal-python/lib/python3.7/site-packages:$PYTHONPATH
 export GEM_HOME=$HOME/gems
 export NODE_PATH=`which node`
