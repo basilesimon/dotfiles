@@ -6,9 +6,6 @@ linkZSH:
 	chsh -s /usr/bin/zsh
 	sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 	sudo apt-get install dconf-cli
-	# cd mate-terminal-colors-solarized
-	# ./install.sh
-	# cd ../
 	ln -f -s ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 	echo "source ${HOME}/.zshrc"
 
