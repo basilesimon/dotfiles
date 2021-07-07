@@ -4,7 +4,7 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 
-(add-to-list 'default-frame-alist '(font . "Input"))
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono"))
 (add-to-list 'default-frame-alist '(height . 50))
 (add-to-list 'default-frame-alist '(width . 80))
 
@@ -511,7 +511,7 @@
  '(default-input-method "latin-postfix")
  '(line-number-mode nil)
  '(org-agenda-files
-   '("/Users/silverie/org/archive.org" "/Users/silverie/org/gafam-tactech.org" "/Users/silverie/org/guide.org" "/Users/silverie/org/gw-sys.org" "/Users/silverie/org/org.org" "/Users/silverie/org/prototype.org" "/Users/silverie/org/radartech.org" "/Users/silverie/org/weeknotes.org" "/Users/silverie/org/dw-reco.org" "/Users/silverie/org/2021-04-12.org"))
+   '("/Users/silverie/org/archive.org" "/Users/silverie/org/gafam-tactech.org" "/Users/silverie/org/guide.org" "/Users/silverie/org/gw-sys.org" "/Users/silverie/org/org.org" "/Users/silverie/org/prototype.org" "/Users/silverie/org/radartech.org" "/Users/silverie/org/weeknotes.org" "/Users/silverie/org/dw-reco.org"))
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends '(ascii html icalendar latex md odt))
@@ -534,10 +534,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-level-1 ((t (:foreground "#cb4b16" :height 1.0 :family "Input"))))
- '(org-level-2 ((t (:foreground "#859900" :height 1.0 :family "Input"))))
- '(org-level-3 ((t (:foreground "#268bd2" :height 1.0 :family "Input"))))
- '(org-level-4 ((t (:foreground "#268bd2" :family "Input"))))
- '(org-level-5 ((t (:foreground "#268bd2" :height 1.0 :family "Input"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil  :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Ubuntu Mono"))))
+ '(org-level-1 ((t (:foreground "#cb4b16" :height 1.0 :family "Ubuntu Mono"))))
+ '(org-level-2 ((t (:foreground "#859900" :height 1.0 :family "Ubuntu Mono"))))
+ '(org-level-3 ((t (:foreground "#268bd2" :height 1.0 :family "Ubuntu Mono"))))
+ '(org-level-4 ((t (:foreground "#268bd2" :family "Ubuntu Mono"))))
+ '(org-level-5 ((t (:foreground "#268bd2" :height 1.0 :family "Ubuntu Mono"))))
  '(show-paren-match ((t (:background "gold"))))
  '(show-paren-mismatch ((((class color)) (:background "red" :foreground "white")))))
