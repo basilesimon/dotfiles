@@ -33,9 +33,21 @@ source ~/.aliases
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 
-# Tmux scheme
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
-TERM="xterm-256color"
+case `uname` in
+  Darwin)
+    # commands for OS X go here
+      # Tmux scheme
+      [[ $TMUX = "" ]] && export TERM="xterm-24bit"
+      TERM="xterm-24bit"
+  ;;
+  Linux)
+    # commands for Linux go here
+      # Tmux scheme
+      [[ $TMUX = "" ]] && export TERM="xterm-256color"
+      TERM="xterm-256color"
+  ;;
+esac
+
 
 # NVM slows down zsh startup A LOT
 # so we lazy load it and still make global binaries available
@@ -49,7 +61,16 @@ NODE_GLOBALS+=("nvm")
 # Lazy-loading nvm + npm on node globals call
 load_nvm () {
   export NVM_DIR=~/.nvm
-  [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+  case `uname` in
+      Darwin)
+	  # commands for OS X go here
+	  [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+	  ;;
+      Linux)
+	  # commands for Linux go here
+	  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+	  ;;
+  esac
 }
 
 # Making node global trigger the lazy loading
