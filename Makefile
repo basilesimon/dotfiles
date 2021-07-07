@@ -71,8 +71,8 @@ nodeMac:
 
 nodeLinux:
     	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-	nvm install 10
-	nvm use 10
+	nvm install --lts
+	nvm use --lts
 	sudo apt remove yarn
 	sudo apt-get install yarn
 	yarn global add prettier
@@ -81,6 +81,14 @@ pythonMac:
 	brew install pyenv 	
 	pyenv install 3.7.2
 	pyenv global 3.7.2
+
+pythonLinux:
+	sudo apt install -y make build-essential libssl-dev zlib1g-dev $\
+		libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev $\
+		libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+	exec ${SHELL}
+	pyenv install 3.7.11
 
 linuxclean:
 	rm -r ${HOME}/.emacs.d/
@@ -134,6 +142,6 @@ albert:
 dockerMac:
 	brew install --cask docker
 
-linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux
+linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux pythonLinuxgit clone https://github.com/pyenv/pyenv.git ~/.pyenv
 macinstall: homebrew gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
 vps: zshLinux gitLinux linkZSH tmux linkDotfiles dockerLinux
