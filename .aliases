@@ -10,15 +10,6 @@ alias co="git commit -m"
 alias push="git push origin master"
 alias status="git status"
 alias diff="git diff"
-
-alias serv="python -m SimpleHTTPServer"
-
-# ssh
-alias sshairwars="ssh basile@178.62.196.225"
-
-# ranger, file explorer
-# uncomment first line for linux, second for Mac
-# alias ranger="ranger --confdir=/home/b/"
-alias ranger="ranger --confdir=/Users/bsimon/"
+alias lg="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit"
 
 alias em="TERM=xterm-24bits emacs -nw"
