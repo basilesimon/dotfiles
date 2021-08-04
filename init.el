@@ -150,7 +150,10 @@
 	  '((sequence "TODO" "DONE")))
     (setq org-todo-keyword-faces
           '(("TODO" . "#dc322f") ("DONE" . "#859900")))
-    (setq org-agenda-files (list org-directory))
+    (setq org-agenda-files
+	  '("~/org"
+	    "~/SynologyDrive/_notes"
+	    "~/SynologyDrive/_notes/daily"))
     (setq org-capture-templates
 	  '(("t" "todo" entry (file+headline "~/org/org.org" "todo")
              "* TODO %?\n  %i\n")
@@ -167,27 +170,30 @@
 ;; roam
 (use-package org-roam
   :ensure t
-  :hook
-  (after-init . org-roam-mode)
   :config
   (progn
     (setq org-roam-capture-templates
-	'(("d" "default" plain (function org-roam--capture-get-point)
-	   "%?"
-	   :file-name "${slug}-%<%Y%m>"
-	   :head "#+title: ${title}\n"
+	'(("d" "default" plain "%?"
+	   :if-new (file+head "${slug}-%<%Y%m>.org"
+			      "#+title: ${title}\n")
 	   :unnarrowed t))))
+  (setq org-roam-node-display-template "${tags:10} ${title:100} ${backlinkscount:6}")
+  :config
+  (org-roam-setup)
   :custom
   (org-roam-directory "~/SynologyDrive/_notes")
-  (org-roam-completion-system 'ivy))
+  (org-roam-completion-system 'ivy)
+  (setq org-roam-v2-ack t))
 
-(use-package org-journal
-      :custom
-      (org-journal-dir "~/org/")
-      (org-journal-date-prefix "#+TITLE: ")
-      (org-journal-file-format "%Y-%m-%d.org")
-      (org-journal-date-format "%A, %d %B %Y"))
-(setq org-journal-enable-agenda-integration t)
+(cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
+  (let* ((count (caar (org-roam-db-query
+                       [:select (funcall count source)
+                                :from links
+                                :where (= dest $s1)
+                                :and (= type "id")]
+                       (org-roam-node-id node)))))
+    (format "[%d]" count)))
+
 
 ;; solarized
 (setq solarized-use-less-bold t)
@@ -452,9 +458,10 @@
   "ms" '(org-schedule :which-key "org schedule")
   ;; Roam
   "mr"  '(:which-key "ROAM")
-  "mri" '(org-roam-find-file :which-key "find file")
-  "mrn" '(org-journal-new-entry :which-key "new journal")
-  "mrt" '(org-roam-buffer-toggle-display :which-key "toggle sidebar")
+  "mri" '(org-roam-node-find :which-key "find node")
+  "mrn" '(org-roam-dailies-capture-today :which-key "new daily journal")
+  "mrg" '(org-roam-dailies-goto-today :which-key "go to daily")
+  "mrt" '(org-roam-buffer-toggle :which-key "toggle sidebar")
   ;; cursors
   "c"  '(:which-key "cursors")
   "cu"  '(evil-mc-undo-all-cursors :which-key "undo all")
@@ -510,8 +517,6 @@
  '(compilation-message-face 'default)
  '(default-input-method "latin-postfix")
  '(line-number-mode nil)
- '(org-agenda-files
-   '("/Users/silverie/org/archive.org" "/Users/silverie/org/gafam-tactech.org" "/Users/silverie/org/guide.org" "/Users/silverie/org/gw-sys.org" "/Users/silverie/org/org.org" "/Users/silverie/org/prototype.org" "/Users/silverie/org/radartech.org" "/Users/silverie/org/weeknotes.org" "/Users/silverie/org/dw-reco.org"))
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends '(ascii html icalendar latex md odt))
@@ -527,14 +532,14 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty org-journal org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil  :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Ubuntu Mono"))))
  '(org-level-1 ((t (:foreground "#cb4b16" :height 1.0 :family "Ubuntu Mono"))))
  '(org-level-2 ((t (:foreground "#859900" :height 1.0 :family "Ubuntu Mono"))))
  '(org-level-3 ((t (:foreground "#268bd2" :height 1.0 :family "Ubuntu Mono"))))
