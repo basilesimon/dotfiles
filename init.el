@@ -145,6 +145,7 @@
     (setq org-ellipsis " ⤵")
     (setq org-agenda-span 14)
     (setq org-agenda-start-on-weekday nil)
+    (setq org-agenda-use-time-grid nil)
     (setq calendar-week-start-day 1)
     (setq org-todo-keywords
 	  '((sequence "TODO" "DONE")))
@@ -153,13 +154,7 @@
     (setq org-agenda-files
 	  '("~/org"
 	    "~/SynologyDrive/_notes"
-	    "~/SynologyDrive/_notes/daily"))
-    (setq org-capture-templates
-	  '(("t" "todo" entry (file+headline "~/org/org.org" "todo")
-             "* TODO %?\n  %i\n")
-	    ("m" "meeting" entry (file+headline "~/org/org.org" "meetings")
-             "* TODO %?\n  %i\n")
-	    ))))
+	    "~/SynologyDrive/_notes/daily"))))
 
 (use-package org-bullets
   :init
@@ -175,15 +170,15 @@
     (setq org-roam-capture-templates
 	'(("d" "default" plain "%?"
 	   :if-new (file+head "${slug}-%<%Y%m>.org"
-			      "#+title: ${title}\n")
-	   :unnarrowed t))))
-  (setq org-roam-node-display-template "${tags:10} ${title:100} ${backlinkscount:6}")
+			      "#+title: ${title} \n")
+	   :unnarrowed t)))
+    (setq org-roam-node-display-template "${tags:10} ${title:100} ${backlinkscount:6}"))
   :config
   (org-roam-setup)
   :custom
   (org-roam-directory "~/SynologyDrive/_notes")
-  (org-roam-completion-system 'ivy)
-  (setq org-roam-v2-ack t))
+  (org-roam-completion-system 'ivy))
+(setq org-roam-v2-ack t)
 
 (cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
   (let* ((count (caar (org-roam-db-query
@@ -194,6 +189,9 @@
                        (org-roam-node-id node)))))
     (format "[%d]" count)))
 
+(require 'websocket)
+(add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
+(load-library "org-roam-ui")
 
 ;; solarized
 (setq solarized-use-less-bold t)
@@ -309,7 +307,7 @@
   (web-mode . prettier-js-mode)
   (rjsx-mode . prettier-js-mode))
 
-(add-to-list 'exec-path "${HOME}/.nvm/versions/node/v10.22.1/bin")
+(add-to-list 'exec-path "${HOME}/.nvm/versions/node/v14.17.3/bin")
 
 (use-package company
   :ensure t
@@ -388,6 +386,38 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.svelte\\'" . web-mode)))
 
+;; TypeScript
+(use-package typescript-mode
+  :mode (("\\.ts\\'" . typescript-mode))
+  :mode (("\\.tsx\\'" . typescript-mode)))
+
+(defun setup-tide-mode ()
+  (interactive)
+  (defun tide-imenu-index () nil)
+  (tide-setup)
+  (tide-hl-identifier-mode +1))
+
+(use-package tide
+  :config
+  (progn
+    (add-hook 'typescript-mode-hook #'setup-tide-mode)))
+
+;; Flycheck
+(use-package flycheck
+  :defer 1
+  :init (setq
+         flycheck-checkers
+         '(typescript-tide
+           javascript-tide
+           jsx-tide
+           javascript-eslint
+           css-csslint
+           emacs-lisp
+           haml
+           json-jsonlint
+           yaml-jsyaml))
+  :config (global-flycheck-mode))
+
 (defun bs/reload-init ()
   "Reloads init file"
   (interactive)
@@ -458,7 +488,8 @@
   "ms" '(org-schedule :which-key "org schedule")
   ;; Roam
   "mr"  '(:which-key "ROAM")
-  "mri" '(org-roam-node-find :which-key "find node")
+  "mrf" '(org-roam-node-find :which-key "find node")
+  "mri" '(org-roam-node-insert :which-key "insert node")
   "mrn" '(org-roam-dailies-capture-today :which-key "new daily journal")
   "mrg" '(org-roam-dailies-goto-today :which-key "go to daily")
   "mrt" '(org-roam-buffer-toggle :which-key "toggle sidebar")
@@ -532,14 +563,14 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(simple-httpd websocket tide typescript-mode solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :foundry "nil" :family "Ubuntu Mono"))))
  '(org-level-1 ((t (:foreground "#cb4b16" :height 1.0 :family "Ubuntu Mono"))))
  '(org-level-2 ((t (:foreground "#859900" :height 1.0 :family "Ubuntu Mono"))))
  '(org-level-3 ((t (:foreground "#268bd2" :height 1.0 :family "Ubuntu Mono"))))
