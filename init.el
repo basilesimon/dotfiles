@@ -196,7 +196,7 @@
 ;; solarized
 (setq solarized-use-less-bold t)
 (setq solarized-emphasize-indicators nil)
-(load-theme 'solarized-light t)
+;; (load-theme 'solarized-light t)
 
 ;; Spaceline - A mode line
 (use-package spaceline
@@ -418,6 +418,9 @@
            yaml-jsyaml))
   :config (global-flycheck-mode))
 
+(add-to-list 'load-path "~/.emacs.d/private/auto-dark-emacs/")
+(require 'auto-dark-emacs)
+
 (defun bs/reload-init ()
   "Reloads init file"
   (interactive)
@@ -545,6 +548,8 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(auto-dark-emacs/dark-theme 'solarized-dark)
+ '(auto-dark-emacs/light-theme 'solarized-light)
  '(compilation-message-face 'default)
  '(default-input-method "latin-postfix")
  '(line-number-mode nil)
