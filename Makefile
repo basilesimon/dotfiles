@@ -2,6 +2,10 @@ homebrew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew update --force && brew upgrade
 
+iterm:
+	brew cask install iterm2
+	ln -f -s ${HOME}/dotfiles/src/change-theme-with-os.py ${HOME}/Library/ApplicationSupport/iTerm2/Scripts/change-theme-with-os.py
+
 linkZSH:
 	chsh -s /usr/bin/zsh
 	sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -143,5 +147,5 @@ dockerMac:
 	brew install --cask docker
 
 linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux pythonLinuxgit clone https://github.com/pyenv/pyenv.git ~/.pyenv
-macinstall: homebrew gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
+macinstall: homebrew iterm gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
 vps: zshLinux gitLinux linkZSH tmux linkDotfiles dockerLinux
