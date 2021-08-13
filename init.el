@@ -163,6 +163,7 @@
   :hook (org-mode . org-bullets-mode))
 
 ;; roam
+(setq org-roam-v2-ack t)
 (use-package org-roam
   :ensure t
   :config
@@ -178,7 +179,6 @@
   :custom
   (org-roam-directory "~/SynologyDrive/_notes")
   (org-roam-completion-system 'ivy))
-(setq org-roam-v2-ack t)
 
 (cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
   (let* ((count (caar (org-roam-db-query
