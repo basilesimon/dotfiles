@@ -146,6 +146,16 @@ albert:
 dockerMac:
 	brew install --cask docker
 
-linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux pythonLinuxgit clone https://github.com/pyenv/pyenv.git ~/.pyenv
+clojureLinux:
+	wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+	sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+	sudo apt-get update
+	sudo apt-get install -y adoptopenjdk-11-hotspot rlwrap
+	curl -O https://download.clojure.org/install/linux-install-1.10.2.774.sh
+	chmod +x linux-install-1.10.2.774.sh
+	sudo ./linux-install-1.10.2.774.sh
+	rm linux-install-1.10.2.774.sh
+
+linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux pythonLinuxgit
 macinstall: homebrew iterm gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
 vps: zshLinux gitLinux linkZSH tmux linkDotfiles dockerLinux
