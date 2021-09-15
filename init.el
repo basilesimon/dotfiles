@@ -196,7 +196,7 @@
 ;; solarized
 (setq solarized-use-less-bold t)
 (setq solarized-emphasize-indicators nil)
-;; (load-theme 'solarized-light t)
+(load-theme 'solarized-light t)
 
 ;; Spaceline - A mode line
 (use-package spaceline
@@ -354,8 +354,9 @@
 
 (use-package clojure-mode
   :ensure t
-  :mode (("\\.clj\\'" . clojure-mode)
-         ("\\.edn\\'" . clojure-mode))
+  :mode (("\\.clj\\'"  . clojure-mode)
+	 ("\\.cljs\\'" . clojure-mode)
+         ("\\.edn\\'"  . clojure-mode))
   :init
   (add-hook 'clojure-mode-hook #'yas-minor-mode)
   (add-hook 'clojure-mode-hook #'linum-mode)
@@ -419,7 +420,19 @@
   :config (global-flycheck-mode))
 
 (add-to-list 'load-path "~/.emacs.d/private/auto-dark-emacs/")
-(require 'auto-dark-emacs)
+;; (require 'auto-dark-emacs)
+
+(defun bs/apply-theme (appearance)
+  "Load theme, taking current system APPEARANCE into consideration."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (load-theme 'solarized-light t))
+    ('dark (load-theme 'solarized-dark t))))
+
+(if window-system
+    (add-hook 'ns-system-appearance-change-functions #'bs/apply-theme)
+    (require 'auto-dark-emacs))
+
 
 (defun bs/reload-init ()
   "Reloads init file"
@@ -548,6 +561,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(auto-dark-emacs/allow-osascript t)
  '(auto-dark-emacs/dark-theme 'solarized-dark)
  '(auto-dark-emacs/light-theme 'solarized-light)
  '(compilation-message-face 'default)
@@ -568,7 +582,7 @@
      ("melpa" . "http://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(simple-httpd websocket tide typescript-mode solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(paredit simple-httpd websocket tide typescript-mode solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
