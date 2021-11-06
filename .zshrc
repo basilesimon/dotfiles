@@ -54,17 +54,31 @@ esac
 # https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs/?context=3
 # https://medium.com/@dannysmith/little-thing-2-speeding-up-zsh-f1860390f92
 # Add every binary that requires nvm, npm or node to run to an array of node globals
-NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+NODE_GLOBALS=(`find ${nvm_path}/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
 NODE_GLOBALS+=("node")
 NODE_GLOBALS+=("nvm")
 
+
+# M1 ARM oddities
+# https://seannicdao.com/2021/02/dual-install-homebrew-nvm-and-node-on-apple-m1/
+if [ "$(sysctl -n sysctl.proc_translated)" = "1" ]; then
+    local brew_path="/usr/local/homebrew/bin"
+    local brew_opt_path="/usr/local/opt"
+    local nvm_path="$HOME/.nvm-x86"
+else
+    local brew_path="/opt/homebrew/bin"
+    local brew_opt_path="/opt/homebrew/opt"
+    local nvm_path="$HOME/.nvm"
+fi
+export PATH="${brew_path}:${PATH}"
+
 # Lazy-loading nvm + npm on node globals call
 load_nvm () {
-  export NVM_DIR=~/.nvm
+  export NVM_DIR="~/.nvm"
   case `uname` in
       Darwin)
 	  # commands for OS X go here
-	  [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+	  [ -s "${brew_opt_path}/nvm/nvm.sh" ] && . "${brew_opt_path}/nvm/nvm.sh"
 	  ;;
       Linux)
 	  # commands for Linux go here
@@ -77,6 +91,7 @@ load_nvm () {
 for cmd in "${NODE_GLOBALS[@]}"; do
   eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
 done
+
 
 export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"

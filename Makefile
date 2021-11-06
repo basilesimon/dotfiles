@@ -3,8 +3,8 @@ homebrew:
 	brew update --force && brew upgrade
 
 iterm:
-	brew cask install iterm2
-	ln -f -s ${HOME}/dotfiles/src/change-theme-with-os.py ${HOME}/Library/ApplicationSupport/iTerm2/Scripts/change-theme-with-os.py
+	brew install --cask iterm2
+	ln -f -s ${HOME}/dotfiles/src/change-theme-with-os.py ${HOME}/Library/Application\ Support/iTerm2/Scripts/change-theme-with-os.py
 
 linkZSH:
 	chsh -s /usr/bin/zsh
@@ -40,12 +40,12 @@ emacsLinux:
 	ln -f -s ${HOME}/dotfiles/snippets ${HOME}/.emacs.d/private/snippets
 
 zshMac:
-	brew install zsh wget tmux
-	sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
-	chsh -s /usr/local/bin/zsh
+	# brew install zsh wget tmux
+	# sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
+	# chsh -s /usr/local/bin/zsh
 	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-	mkdir ${HOME}/colorschemes/
-	ln -f -s ${HOME}/dotfiles/colorschemes/solarized.py ${HOME}/colorschemes/solarized.py
+	# mkdir ${HOME}/colorschemes/
+	# ln -f -s ${HOME}/dotfiles/colorschemes/solarized.py ${HOME}/colorschemes/solarized.py
 	rm ${HOME}/.zshrc
 	ln -f -s ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 	ln -f -s ${HOME}/dotfiles/.terminfo-24bit.src ${HOME}/.terminfo-24bit.src
@@ -66,11 +66,12 @@ linkDotfiles:
 	ln -f -s ${HOME}/dotfiles/.colors ${HOME}/.colors
 	ln -f -s ${HOME}/dotfiles/.aliases ${HOME}/.aliases 
 	ln -f -s ${HOME}/dotfiles/.profile ${HOME}/.profile
+	ln -f -s ${HOME}/dotfiles/.slate ${HOME}/.slate
 
 nodeMac:
 	brew install nvm yarn
-	nvm install 10 
-	nvm use 10
+	nvm install --lts
+	nvm use --lts
 	yarn global add prettier csvtojson
 
 nodeLinux:
@@ -156,6 +157,11 @@ clojureLinux:
 	sudo ./linux-install-1.10.2.774.sh
 	rm linux-install-1.10.2.774.sh
 
+orgFiles:
+	brew install --cask dropbox
+	echo "Install and auth to Dropbox..."
+	ln -f -s ${HOME}/Dropbox/org ${HOME}/org
+
 linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux pythonLinuxgit
-macinstall: homebrew iterm gitMac zshMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
+macinstall: homebrew zshMac iterm gitMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
 vps: zshLinux gitLinux linkZSH tmux linkDotfiles dockerLinux

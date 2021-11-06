@@ -16,7 +16,7 @@
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
                          ("gnu"   . "http://elpa.gnu.org/packages/")
                          ("melpa" . "http://melpa.org/packages/")))
-(package-initialize)
+;; (package-initialize)
 
 ;; Bootstrap `use-package`
 (unless (package-installed-p 'use-package)
@@ -163,35 +163,35 @@
   :hook (org-mode . org-bullets-mode))
 
 ;; roam
-(setq org-roam-v2-ack t)
-(use-package org-roam
-  :ensure t
-  :config
-  (progn
-    (setq org-roam-capture-templates
-	'(("d" "default" plain "%?"
-	   :if-new (file+head "${slug}-%<%Y%m>.org"
-			      "#+title: ${title} \n")
-	   :unnarrowed t)))
-    (setq org-roam-node-display-template "${tags:10} ${title:100} ${backlinkscount:6}"))
-  :config
-  (org-roam-setup)
-  :custom
-  (org-roam-directory "~/SynologyDrive/_notes")
-  (org-roam-completion-system 'ivy))
+;; (setq org-roam-v2-ack t)
+;; (use-package org-roam
+;;   :ensure t
+;;   :config
+;;   (progn
+;;     (setq org-roam-capture-templates
+;; 	'(("d" "default" plain "%?"
+;; 	   :if-new (file+head "${slug}-%<%Y%m>.org"
+;; 			      "#+title: ${title} \n")
+;; 	   :unnarrowed t)))
+;;     (setq org-roam-node-display-template "${tags:10} ${title:100} ${backlinkscount:6}"))
+;;   :config
+;;   (org-roam-setup)
+;;   :custom
+;;   (org-roam-directory "~/SynologyDrive/_notes")
+;;   (org-roam-completion-system 'ivy))
 
-(cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
-  (let* ((count (caar (org-roam-db-query
-                       [:select (funcall count source)
-                                :from links
-                                :where (= dest $s1)
-                                :and (= type "id")]
-                       (org-roam-node-id node)))))
-    (format "[%d]" count)))
+;; (cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
+;;   (let* ((count (caar (org-roam-db-query
+;;                        [:select (funcall count source)
+;;                                 :from links
+;;                                 :where (= dest $s1)
+;;                                 :and (= type "id")]
+;;                        (org-roam-node-id node)))))
+;;     (format "[%d]" count)))
 
-(require 'websocket)
-(add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
-(load-library "org-roam-ui")
+;; (require 'websocket)
+;; (add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
+;; (load-library "org-roam-ui")
 
 ;; solarized
 (setq solarized-use-less-bold t)
