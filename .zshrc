@@ -74,7 +74,7 @@ export PATH="${brew_path}:${PATH}"
 
 # Lazy-loading nvm + npm on node globals call
 load_nvm () {
-  export NVM_DIR="~/.nvm"
+  export NVM_DIR="${HOME}/.nvm"
   case `uname` in
       Darwin)
 	  # commands for OS X go here
