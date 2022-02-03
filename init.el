@@ -13,8 +13,7 @@
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# filesrequire 'package)
 (setq package-enable-at-startup nil)
-(setq package-archives '(("org"   . "https://orgmode.org/elpa/")
-                         ("gnu"   . "https://elpa.gnu.org/packages/")
+(setq package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 ;; (package-initialize)
 
@@ -153,8 +152,7 @@
           '(("TODO" . "#dc322f") ("DONE" . "#859900")))
     (setq org-agenda-files
 	  '("~/org"
-	    "~/SynologyDrive/_notes"
-	    "~/SynologyDrive/_notes/daily"))))
+	    "~/SynologyDrive/_notes"))))
 
 (use-package org-bullets
   :init
@@ -171,7 +169,7 @@
     (setq org-roam-capture-templates
 	'(("d" "default" plain "%?"
 	   :if-new (file+head "${slug}-%<%Y%m>.org"
-			      "#+title: ${title} \n")
+			      "#+title: ${title} \n#+filetags: ::")
 	   :unnarrowed t)))
     (setq org-roam-node-display-template "${tags:10} ${title:100} ${backlinkscount:6}"
 	  org-roam-directory "~/SynologyDrive/_notes"
@@ -310,7 +308,8 @@
   :hook
   (js2-mode . prettier-js-mode)
   (web-mode . prettier-js-mode)
-  (rjsx-mode . prettier-js-mode))
+  (rjsx-mode . prettier-js-mode)
+  (typescript-mode . prettier-js-mode))
 
 (add-to-list 'exec-path "${HOME}/.nvm/versions/node/v14.17.3/bin")
 
@@ -579,11 +578,10 @@
  '(org-journal-date-prefix "#+TITLE: ")
  '(org-journal-dir "~/org/")
  '(org-journal-file-format "%Y-%m-%d.org")
- '(org-roam-completion-system 'ivy)
+ '(org-roam-completion-system 'ivy t)
  '(org-roam-directory "~/SynologyDrive/_notes")
  '(package-archives
-   '(("org" . "https://orgmode.org/elpa/")
-     ("gnu" . "https://elpa.gnu.org/packages/")
+   '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
