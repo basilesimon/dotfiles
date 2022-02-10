@@ -160,42 +160,6 @@
 	'("◉" "◎" ">" "○" "►" "◇"))
   :hook (org-mode . org-bullets-mode))
 
-;; roam
-(setq org-roam-v2-ack t)
-(use-package org-roam
-  :ensure t
-  :config
-  (progn
-    (setq org-roam-capture-templates
-	'(("d" "default" plain "%?"
-	   :if-new (file+head "${slug}-%<%Y%m>.org"
-			      "#+title: ${title} \n#+filetags: ::")
-	   :unnarrowed t)))
-    (setq org-roam-node-display-template "${tags:10} ${title:100} ${backlinkscount:6}"
-	  org-roam-directory "~/SynologyDrive/_notes"
-	  org-roam-completion-system 'ivy
-	  org-roam-db-autosync-mode t)))
-
-(cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
-  (let* ((count (caar (org-roam-db-query
-                       [:select (funcall count source)
-                                :from links
-                                :where (= dest $s1)
-                                :and (= type "id")]
-                       (org-roam-node-id node)))))
-    (format "[%d]" count)))
-
-;; (require 'websocket)
-;; (add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
-;; (load-library "org-roam-ui")
-(use-package org-roam-ui
-    :after org-roam
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
-
 ;; solarized
 (setq solarized-use-less-bold t)
 (setq solarized-emphasize-indicators nil)
@@ -506,13 +470,6 @@
   "mN" '(widen :which-key "org widen")
   "mc" '(counsel-org-capture :which-key "org capture")
   "ms" '(org-schedule :which-key "org schedule")
-  ;; Roam
-  "mr"  '(:which-key "ROAM")
-  "mrf" '(org-roam-node-find :which-key "find node")
-  "mri" '(org-roam-node-insert :which-key "insert node")
-  "mrn" '(org-roam-dailies-capture-today :which-key "new daily journal")
-  "mrg" '(org-roam-dailies-goto-today :which-key "go to daily")
-  "mrt" '(org-roam-buffer-toggle :which-key "toggle sidebar")
   ;; cursors
   "c"  '(:which-key "cursors")
   "cu"  '(evil-mc-undo-all-cursors :which-key "undo all")
@@ -578,14 +535,12 @@
  '(org-journal-date-prefix "#+TITLE: ")
  '(org-journal-dir "~/org/")
  '(org-journal-file-format "%Y-%m-%d.org")
- '(org-roam-completion-system 'ivy t)
- '(org-roam-directory "~/SynologyDrive/_notes")
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
      ("" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(org-roam-ui paredit simple-httpd websocket tide typescript-mode solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty org-roam cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
+   '(parseclj paredit simple-httpd websocket tide typescript-mode solarized-theme evil-surround magit ranger smooth-scrolling rainbow-delimiters clipetty cider markdown-mode clojure-mode undo-tree yaml-mode spaceline-all-the-icons org-bullets rjsx-mode add-node-modules-path prettier olivetti web-mode darkroom ess lorem-ipsum simpleclip company exec-path-from-shell prettier-js evil-mc nlinum-relative diff-hl diminish powerline-evil telephone-line highlight-indent-guides ivy which-key use-package neotree general evil all-the-icons))
  '(spaceline-all-the-icons-clock-always-visible t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
