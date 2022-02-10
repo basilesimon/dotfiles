@@ -58,18 +58,9 @@ NODE_GLOBALS=(`find ${nvm_path}/versions/node -maxdepth 3 -type l -wholename '*/
 NODE_GLOBALS+=("node")
 NODE_GLOBALS+=("nvm")
 
-
-# M1 ARM oddities
-# https://seannicdao.com/2021/02/dual-install-homebrew-nvm-and-node-on-apple-m1/
-if [ "$(sysctl -n sysctl.proc_translated)" = "1" ]; then
-    local brew_path="/usr/local/homebrew/bin"
-    local brew_opt_path="/usr/local/opt"
-    local nvm_path="$HOME/.nvm-x86"
-else
-    local brew_path="/opt/homebrew/bin"
-    local brew_opt_path="/opt/homebrew/opt"
-    local nvm_path="$HOME/.nvm"
-fi
+local brew_path="/opt/homebrew/bin"
+local brew_opt_path="/opt/homebrew/opt"
+local nvm_path="$HOME/.nvm"
 export PATH="${brew_path}:${PATH}"
 
 # Lazy-loading nvm + npm on node globals call
@@ -78,7 +69,8 @@ load_nvm () {
   case `uname` in
       Darwin)
 	  # commands for OS X go here
-	  [ -s "${brew_opt_path}/nvm/nvm.sh" ] && . "${brew_opt_path}/nvm/nvm.sh"
+	[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 	  ;;
       Linux)
 	  # commands for Linux go here
@@ -93,9 +85,9 @@ for cmd in "${NODE_GLOBALS[@]}"; do
 done
 
 
-export PYENV_ROOT="$HOME/.pyenv"
-eval "$(pyenv init -)"
-eval "$(pyenv init --path)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# eval "$(pyenv init -)"
+# eval "$(pyenv init --path)"
 export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:/usr/local/opt/imagemagick@6/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/silverie/gems/bin:$PYENV_ROOT/bin:$PATH"
 export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/QGIS.app/Contents/Resources/python:/usr/local/opt/osgeo-gdal-python/lib/python3.7/site-packages:$PYTHONPATH
 export GEM_HOME=$HOME/gems
