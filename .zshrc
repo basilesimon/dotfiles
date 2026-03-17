@@ -1,9 +1,15 @@
 #Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# History file location
+export HISTFILE=$HOME/Documents/zsh_history
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="ys"
+
+# Set custom hostname for prompt
+DEFAULT_USER="home"
 
 #keybindings
 bindkey '\e[1;5C' forward-word # ctrl right
@@ -37,8 +43,8 @@ case `uname` in
   Darwin)
     # commands for OS X go here
       # Tmux scheme
-      [[ $TMUX = "" ]] && export TERM="xterm-24bit"
-      TERM="xterm-24bit"
+      [[ $TMUX = "" ]] && export TERM="xterm-256color"
+      TERM="xterm-256color"
   ;;
   Linux)
     # commands for Linux go here
@@ -61,7 +67,7 @@ NODE_GLOBALS+=("nvm")
 local brew_path="/opt/homebrew/bin"
 local brew_opt_path="/opt/homebrew/opt"
 local nvm_path="$HOME/.nvm"
-export PATH="${brew_path}:${PATH}"
+export PATH="${brew_path}:${brew_opt_path}/libpq/bin:${PATH}"
 
 # Lazy-loading nvm + npm on node globals call
 load_nvm () {
@@ -69,8 +75,9 @@ load_nvm () {
   case `uname` in
       Darwin)
 	  # commands for OS X go here
-	[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+        [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+        [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 	  ;;
       Linux)
 	  # commands for Linux go here
@@ -85,11 +92,10 @@ for cmd in "${NODE_GLOBALS[@]}"; do
 done
 
 
-# export PYENV_ROOT="$HOME/.pyenv"
-# eval "$(pyenv init -)"
-# eval "$(pyenv init --path)"
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:/usr/local/opt/imagemagick@6/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/silverie/gems/bin:$PYENV_ROOT/bin:$PATH"
 export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/QGIS.app/Contents/Resources/python:/usr/local/opt/osgeo-gdal-python/lib/python3.7/site-packages:$PYTHONPATH
 export GEM_HOME=$HOME/gems
 export NODE_PATH=`which node`
-

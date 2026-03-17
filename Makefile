@@ -59,6 +59,14 @@ linkDotfiles:
 	ln -f -s ${HOME}/dotfiles/.colors ${HOME}/.colors
 	ln -f -s ${HOME}/dotfiles/.aliases ${HOME}/.aliases
 	ln -f -s ${HOME}/dotfiles/.profile ${HOME}/.profile
+	ln -f -s ${HOME}/dotfiles/.slate ${HOME}/.slate
+	mkdir -p ${HOME}/Documents/certs
+	test -L ${HOME}/.ssh || (test -d ${HOME}/.ssh && mv ${HOME}/.ssh ${HOME}/Documents/certs/ssh) || true
+	ln -f -s ${HOME}/Documents/certs/ssh ${HOME}/.ssh
+	test -L ${HOME}/.gnupg || (test -d ${HOME}/.gnupg && mv ${HOME}/.gnupg ${HOME}/Documents/certs/gnupg) || true
+	ln -f -s ${HOME}/Documents/certs/gnupg ${HOME}/.gnupg
+	test -L ${HOME}/.zsh_history || (test -f ${HOME}/.zsh_history && mv ${HOME}/.zsh_history ${HOME}/Documents/zsh_history) || true
+	ln -f -s ${HOME}/Documents/zsh_history ${HOME}/.zsh_history
 
 nodeMac:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash

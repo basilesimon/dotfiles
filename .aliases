@@ -9,7 +9,7 @@ alias add="git add"
 alias co="git commit -m"
 alias push="git push origin master"
 alias status="git status"
-alias diff="git diff"
+# alias diff="git diff"
 alias lg="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit"
 
 alias em="TERM=xterm-24bits emacs -nw"
