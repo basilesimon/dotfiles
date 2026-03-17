@@ -1,5 +1,5 @@
 homebrew:
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew update --force && brew upgrade
 
 iterm:
@@ -54,8 +54,8 @@ zshMac:
 
 emacsMac:
 	brew tap d12frosted/emacs-plus
-	brew install emacs-plus@27
-	ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications
+	brew install emacs-plus@29
+	ln -sf $$(brew --prefix)/opt/emacs-plus@29/Emacs.app /Applications
 	mkdir ${HOME}/.emacs.d/
 	mkdir ${HOME}/.emacs.d/private
 	ln -f -s ${HOME}/dotfiles/init.el ${HOME}/.emacs.d/init.el
@@ -69,10 +69,10 @@ linkDotfiles:
 	ln -f -s ${HOME}/dotfiles/.slate ${HOME}/.slate
 
 nodeMac:
-	brew install nvm yarn
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 	nvm install --lts
 	nvm use --lts
-	yarn global add prettier csvtojson
+	npm install -g prettier csvtojson
 
 nodeLinux:
     	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
@@ -83,9 +83,9 @@ nodeLinux:
 	yarn global add prettier
 
 pythonMac:
-	brew install pyenv 	
-	pyenv install 3.7.2
-	pyenv global 3.7.2
+	brew install pyenv
+	pyenv install 3.13
+	pyenv global 3.13
 
 pythonLinux:
 	sudo apt install -y make build-essential libssl-dev zlib1g-dev $\
@@ -106,16 +106,16 @@ linuxclean:
 rubyMac:
 	brew install rbenv
 	rbenv init
-	rbenv install 2.7.1
-	rbenv global 2.7.1
+	rbenv install 3.3
+	rbenv global 3.3
 
-slateMac: 
-	cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
-	echo "logout of the session and start Slate"
+rectangleMac:
+	brew install --cask rectangle
+	echo "Open Rectangle from Applications and grant Accessibility permissions"
 
 rMac:
-	brew cask install r
-	brew cask install rstudio
+	brew install --cask r
+	brew install --cask rstudio
 
 gitMac:
 	brew install git
@@ -163,5 +163,5 @@ orgFiles:
 	ln -f -s ${HOME}/Dropbox/org ${HOME}/org
 
 linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux pythonLinuxgit
-macinstall: homebrew zshMac iterm gitMac linkDotfiles tmux nodeMac pythonMac rubyMac slateMac rMac dockerMac
+macinstall: homebrew zshMac iterm gitMac linkDotfiles tmux emacsMac linkEmacs nodeMac pythonMac rubyMac rectangleMac rMac dockerMac
 vps: zshLinux gitLinux linkZSH tmux linkDotfiles dockerLinux
