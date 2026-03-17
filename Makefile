@@ -14,8 +14,7 @@ linkZSH:
 	echo "source ${HOME}/.zshrc"
 
 tmux:
-	mkdir ${HOME}/.tmux
-	mkdir ${HOME}/.tmux/plugins
+	mkdir -p ${HOME}/.tmux/plugins
 	git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 	ln -f -s ${HOME}/dotfiles/.tmux.conf ${HOME}/.tmux.conf
 
@@ -40,16 +39,10 @@ emacsLinux:
 	ln -f -s ${HOME}/dotfiles/snippets ${HOME}/.emacs.d/private/snippets
 
 zshMac:
-	# brew install zsh wget tmux
-	# sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
-	# chsh -s /usr/local/bin/zsh
 	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-	# mkdir ${HOME}/colorschemes/
-	# ln -f -s ${HOME}/dotfiles/colorschemes/solarized.py ${HOME}/colorschemes/solarized.py
 	rm ${HOME}/.zshrc
 	ln -f -s ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 	ln -f -s ${HOME}/dotfiles/.terminfo-24bit.src ${HOME}/.terminfo-24bit.src
-	source ${HOME}/.zshrc
 	tic -x -o ~/.terminfo ~/dotfiles/terminfo-24bit.src
 
 emacsMac:
@@ -64,15 +57,13 @@ emacsMac:
 linkDotfiles:
 	ln -f -s ${HOME}/dotfiles/.config ${HOME}/.config
 	ln -f -s ${HOME}/dotfiles/.colors ${HOME}/.colors
-	ln -f -s ${HOME}/dotfiles/.aliases ${HOME}/.aliases 
+	ln -f -s ${HOME}/dotfiles/.aliases ${HOME}/.aliases
 	ln -f -s ${HOME}/dotfiles/.profile ${HOME}/.profile
-	ln -f -s ${HOME}/dotfiles/.slate ${HOME}/.slate
 
 nodeMac:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-	nvm install --lts
-	nvm use --lts
-	npm install -g prettier csvtojson
+	. ${HOME}/.nvm/nvm.sh && nvm install --lts && nvm use --lts
+	. ${HOME}/.nvm/nvm.sh && npm install -g prettier csvtojson
 
 nodeLinux:
     	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
@@ -163,5 +154,5 @@ orgFiles:
 	ln -f -s ${HOME}/Dropbox/org ${HOME}/org
 
 linuxinstall: zshLinux gitLinux linkZSH tmux emacsLinux linkEmacs linkDotfiles dockerLinux pythonLinuxgit
-macinstall: homebrew zshMac iterm gitMac linkDotfiles tmux emacsMac linkEmacs nodeMac pythonMac rubyMac rectangleMac rMac dockerMac
+macinstall: homebrew zshMac iterm gitMac linkDotfiles tmux nodeMac pythonMac rectangleMac
 vps: zshLinux gitLinux linkZSH tmux linkDotfiles dockerLinux
