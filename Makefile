@@ -69,7 +69,7 @@ linkDotfiles:
 	ln -f -s ${HOME}/Documents/zsh_history ${HOME}/.zsh_history
 
 nodeMac:
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 	. ${HOME}/.nvm/nvm.sh && nvm install --lts && nvm use --lts
 	. ${HOME}/.nvm/nvm.sh && npm install -g prettier csvtojson
 

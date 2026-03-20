@@ -60,13 +60,13 @@ esac
 # https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs/?context=3
 # https://medium.com/@dannysmith/little-thing-2-speeding-up-zsh-f1860390f92
 # Add every binary that requires nvm, npm or node to run to an array of node globals
-NODE_GLOBALS=(`find ${nvm_path}/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
-NODE_GLOBALS+=("node")
-NODE_GLOBALS+=("nvm")
-
 local brew_path="/opt/homebrew/bin"
 local brew_opt_path="/opt/homebrew/opt"
 local nvm_path="$HOME/.nvm"
+
+NODE_GLOBALS=(`find ${nvm_path}/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq 2>/dev/null`)
+NODE_GLOBALS+=("node")
+NODE_GLOBALS+=("nvm")
 export PATH="${brew_path}:${brew_opt_path}/libpq/bin:${PATH}"
 
 # Lazy-loading nvm + npm on node globals call
@@ -92,10 +92,11 @@ for cmd in "${NODE_GLOBALS[@]}"; do
 done
 
 
-export PYENV_ROOT="$HOME/.pyenv"
-eval "$(pyenv init -)"
-eval "$(pyenv init --path)"
-export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:/usr/local/opt/imagemagick@6/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/silverie/gems/bin:$PYENV_ROOT/bin:$PATH"
-export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/QGIS.app/Contents/Resources/python:/usr/local/opt/osgeo-gdal-python/lib/python3.7/site-packages:$PYTHONPATH
+# export PYENV_ROOT="$HOME/.pyenv"
+# eval "$(pyenv init -)"
+# eval "$(pyenv init --path)"
+# export PATH=$PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Library/TeX/texbin:/usr/local/opt/imagemagick@6/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/silverie/gems/bin:$PYENV_ROOT/bin:$PATH"
+# export PYTHONPATH=/usr/local/opt/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/lib/python3.7/site-packages:/usr/local/opt/osgeo-qgis/QGIS.app/Contents/Resources/python:/usr/local/opt/osgeo-gdal-python/lib/python3.7/site-packages:$PYTHONPATH
 export GEM_HOME=$HOME/gems
 export NODE_PATH=`which node`
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
